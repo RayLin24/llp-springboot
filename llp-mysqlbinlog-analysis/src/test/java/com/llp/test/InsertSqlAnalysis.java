@@ -106,7 +106,6 @@ public class InsertSqlAnalysis {
         bufferedWriter.close();
     }
 
-
     public static void writeByTableList(List<String> tableNameList,String sql,BufferedWriter bufferedWriter) throws IOException {
         String[] splitArray = sql.split("\n");
         for (int j = 0; j < splitArray.length; j++) {
