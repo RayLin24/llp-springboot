@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MyTest {
+public class SelectSqlAnalysis {
     public static void main(String[] args) throws Exception {
         List<String>  tableNameList = Lists.list("`charge_notice`",
                 "`charge_notice_detail`",

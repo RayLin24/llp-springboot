@@ -9,6 +9,7 @@
 	<version>1.0-SNAPSHOT</version>
 	<modules>
 		<module>llp-mysqlbinlog-analysis</module>
+		<module>llp-mybatisplus</module>
 	</modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>
@@ -22,7 +23,10 @@
 		<lombok.version>1.18.20</lombok.version>
 		<mysql.version>5.1.47</mysql.version>
 		<druid.boot.version>1.2.11</druid.boot.version>
-		<mybatisplus.boot.version>3.4.1</mybatisplus.boot.version>
+		<mybatisplus.boot.version>3.5.2</mybatisplus.boot.version>
+		<hutool.version>5.7.22</hutool.version>
+		<mybatisplus.generator.version>3.5.2</mybatisplus.generator.version>
+		<mybatisplus.velocity.version>2.3</mybatisplus.velocity.version>
 	</properties>
 
 
@@ -36,8 +40,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<!--也可以指定parent，这里直接绕过parent指定版本-->
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>2.2.2.RELEASE
-				</version>
+				<version>2.2.2.RELEASE</version>
 				<!-- 解读:
 				 1. type: pom 和 scope import 配合使用
 				 2. 表示父项目的子模块,在引入springboot相关依赖时锁定版本为2.2.2.RELEASE
@@ -89,6 +92,21 @@
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<version>${lombok.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.hutool</groupId>
+				<artifactId>hutool-all</artifactId>
+				<version>${hutool.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-generator</artifactId>
+				<version>${mybatisplus.generator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity-engine-core</artifactId>
+				<version>${mybatisplus.velocity.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
