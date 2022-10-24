@@ -60,8 +60,8 @@ public class UpdateSqlAnalysis {
         //       );
         List<String> tableNameList   = Lists.list("cost_detail");
 
-        String binlogPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\binlog";
-        String analysisUpdateSqlPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\updatesql\\";
+        String binlogPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\binlog";
+        String analysisUpdateSqlPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\updatesql\\";
         File file = new File(binlogPath);
         if(file.isDirectory()){
             File[] files = file.listFiles();

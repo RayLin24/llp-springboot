@@ -58,11 +58,10 @@ public class UpdateSqlAnalysisOne {
         //        //"charge_notice",
         //        "charge_notice_detail"
         //       );
-        List<String> tableNameList   = Lists.list("bill_invoice");
-
-        String binlogPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\binlog";
-        String analysisUpdateSqlPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\updatesql\\";
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(analysisUpdateSqlPath+"bill_invoice.sql"));
+        List<String> tableNameList   = Lists.list("sys_obs_authority");
+        String binlogPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\binlog";
+        String analysisUpdateSqlPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\updatesql\\";
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(analysisUpdateSqlPath+"sys_obs_authority.sql"));
         File file = new File(binlogPath);
         if(file.isDirectory()){
             File[] files = file.listFiles();

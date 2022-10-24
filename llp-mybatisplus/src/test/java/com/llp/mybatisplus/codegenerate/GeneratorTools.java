@@ -90,13 +90,13 @@ public class GeneratorTools {
                 .enableLombok()//开启lombok
                 .enableRemoveIsPrefix()//开启 Boolean 类型字段移除 is 前缀
                 .enableTableFieldAnnotation()//开启生成实体时生成字段注解
-                //.addTableFills()//添加表字段填充
+                .addTableFills()//添加表字段填充
                 .naming(NamingStrategy.underline_to_camel)//数据表映射实体命名策略：默认下划线转驼峰underline_to_camel
                 .columnNaming(NamingStrategy.underline_to_camel)//表字段映射实体属性命名规则：默认null，不指定按照naming执行
                 .idType(IdType.ASSIGN_ID)//添加全局逐渐类型
                 //.formatFileName("%s")//格式化实体名称，%s取消首字母I
                 .build()
- 
+
                 .mapperBuilder()//mapper文件策略
                 .enableMapperAnnotation()//开启mapper注解
                 .enableBaseResultMap()//启用xml文件中的BaseResultMap 生成

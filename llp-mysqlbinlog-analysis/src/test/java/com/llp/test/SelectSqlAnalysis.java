@@ -23,8 +23,8 @@ public class SelectSqlAnalysis {
                 "`bill_invoice`",
                 "`charge_payment_record`");
         for (String tableName : tableNameList) {
-            String sqlPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\1.sql";
-            String destFilePath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\updateSql.sql";
+            String sqlPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\1.sql";
+            String destFilePath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\updateSql.sql";
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destFilePath));
             BufferedReader bufferedReader = new BufferedReader(new FileReader(sqlPath));
             String line = null;

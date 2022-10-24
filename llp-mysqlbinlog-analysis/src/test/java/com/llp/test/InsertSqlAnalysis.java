@@ -29,12 +29,12 @@ public class InsertSqlAnalysis {
                 "cost_detail",
                 "charge_notice_detail",
                 "charge_notice");
-        //String binlogPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\mysql-bin.052393.sql";
+        //String binlogPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\mysql-bin.052393.sql";
         //拷贝的文件
-        //String destFilePath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\mysql-bin.052393-NEW.sql";
+        //String destFilePath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\mysql-bin.052393-NEW.sql";
 
-        String sqlPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\binlog";
-        String analysissqlPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\insertsql\\";
+        String sqlPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\binlog";
+        String analysissqlPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\insertsql\\";
         File file = new File(sqlPath);
         if(file.isDirectory()){
             File[] files = file.listFiles();

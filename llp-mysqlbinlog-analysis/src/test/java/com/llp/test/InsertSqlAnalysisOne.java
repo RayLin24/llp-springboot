@@ -29,14 +29,14 @@ public class InsertSqlAnalysisOne {
         //        "cost_detail",
         //        "charge_notice_detail",
         //        "charge_notice");
-        List<String> tableNameList = Lists.list("bill_invoice_detail");
-        //String binlogPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\mysql-bin.052393.sql";
+        List<String> tableNameList = Lists.list("sys_obs");
+        //String binlogPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\mysql-bin.052393.sql";
         //拷贝的文件
-        //String destFilePath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\mysql-bin.052393-NEW.sql";
+        //String destFilePath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\mysql-bin.052393-NEW.sql";
 
-        String sqlPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\binlog";
-        String analysissqlPath = "E:\\opensource\\llp-springboot\\llp-remoteshell\\src\\main\\resources\\insertsql\\";
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(analysissqlPath+"bill_invoice_detail.sql"));
+        String sqlPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\binlog";
+        String analysissqlPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\insertsql\\";
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(analysissqlPath+"sys_obs.sql"));
         File file = new File(sqlPath);
         if(file.isDirectory()){
             File[] files = file.listFiles();
@@ -70,10 +70,7 @@ public class InsertSqlAnalysisOne {
                         }
                         sql = sql.replaceAll("### SET", "VALUES(");
                         sql = sql.replaceAll("###|@", "");
-                        sql = sql.replaceAll("(\\d+)=", ",");
-                        sql = sql.replaceFirst(",", "");
-
-                        Pattern compile = Pattern.compile("_time=(1665(\\d{6}))");
+                        Pattern compile = Pattern.compile("=(1665(\\d{6}))");
                         Matcher matcher = compile.matcher(sql);
                         while (matcher.find()) {
                             String time = matcher.group(0).split("=")[1];
@@ -81,7 +78,10 @@ public class InsertSqlAnalysisOne {
                             String date = sdf.format(new Date(Long.parseLong(time) * 1000)); // 时间戳转换日期
                             sql = sql.replaceAll(time, "'"+date+"'");
                         }
-                        compile = Pattern.compile("\\d{20}");
+                        sql = sql.replaceAll("(\\d+)=", ",");
+                        sql = sql.replaceFirst(",", "");
+
+                        compile = Pattern.compile("\\(\\d{20}\\)");
                         matcher = compile.matcher(sql);
                         while (matcher.find()) {
                             String group = matcher.group(0);
