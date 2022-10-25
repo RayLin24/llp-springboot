@@ -13,3 +13,4 @@ gen
 /.gitignore
 /patrol-admin/target/
 /.idea/
+/test-classes/
