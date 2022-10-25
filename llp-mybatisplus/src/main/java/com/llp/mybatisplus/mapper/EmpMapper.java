@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author llp
- * @since 2022年10月21日
+ * @since 2022-10-25
  */
 @Mapper
 public interface EmpMapper extends BaseMapper<Emp> {

@@ -1,13 +1,18 @@
 package com.llp.mybatisplus.codegenerate;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
+import com.baomidou.mybatisplus.generator.IFill;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.generator.fill.Column;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,11 +49,10 @@ public class GeneratorTools {
         GlobalConfig global = new GlobalConfig.Builder()
                 .outputDir(filePath)//生成的输出路径
                 .author("llp")//生成的作者名字
-                .enableSwagger()//开启swagger
+                //.enableSwagger()//开启swagger
                 .dateType(DateType.TIME_PACK)//时间策略
-                .commentDate("yyyy年MM月dd日")//格式化时间格式
+                .commentDate("yyyy年MM月dd日")//注释日期获取处理
                 .disableOpenDir()//禁止打开输出目录，默认false
-                .fileOverride()//覆盖生成文件
                 .build();
  
         /**
@@ -62,7 +66,7 @@ public class GeneratorTools {
                 .xml("mapper.xml")//数据访问层xml包名
                 .service("service")//service层包名
                 .serviceImpl("service.impl")//service实现类包名
-                .other("output")//输出自定义文件时的包名
+                //.other("output")//输出自定义文件时的包名
                 //.pathInfo()路径配置信息,就是配置各个文件模板的路径信息
                 .build();
 
@@ -80,24 +84,35 @@ public class GeneratorTools {
         /**
          * 策略配置开始
          */
+
+        IFill createTime = new Column("create_time",FieldFill.INSERT);
+        IFill updateTime= new Column("update_time", FieldFill.INSERT_UPDATE);
+        IFill deleted= new Column("deleted", FieldFill.INSERT);
+
+        List<IFill> iFillList = new ArrayList();
+        iFillList.add(createTime);
+        iFillList.add(updateTime);
+        iFillList.add(deleted);
         StrategyConfig strategyConfig = new StrategyConfig.Builder()
                 .enableCapitalMode()//开启全局大写命名
                 //.likeTable()模糊表匹配
                 .addInclude("emp")//添加表匹配，指定要生成的数据表名，不写默认选定数据库所有表
                 //.disableSqlFilter()禁用sql过滤:默认(不使用该方法）true
                 //.enableSchema()启用schema:默认false
- 
                 .entityBuilder() //实体策略配置
+                .idType(IdType.ASSIGN_ID)
+                .versionPropertyName("version")
                 //.disableSerialVersionUID() //禁用生成SerialVersionUID：默认true
-                //.enableChainModel()//开启链式模型
+                .enableChainModel()//开启链式模型
                 .enableLombok()//开启lombok
+                .logicDeletePropertyName("deleted")
                 .enableRemoveIsPrefix()//开启 Boolean 类型字段移除 is 前缀
                 .enableTableFieldAnnotation()//开启生成实体时生成字段注解
-                .addTableFills()//添加表字段填充
+                .addTableFills(iFillList)//添加表字段填充
                 .naming(NamingStrategy.underline_to_camel)//数据表映射实体命名策略：默认下划线转驼峰underline_to_camel
                 .columnNaming(NamingStrategy.underline_to_camel)//表字段映射实体属性命名规则：默认null，不指定按照naming执行
-                .idType(IdType.ASSIGN_ID)//添加全局逐渐类型
                 //.formatFileName("%s")//格式化实体名称，%s取消首字母I
+                .fileOverride()
                 .build()
 
                 .mapperBuilder()//mapper文件策略
@@ -112,6 +127,7 @@ public class GeneratorTools {
                 .serviceBuilder()//service文件策略
                 .formatServiceFileName("%sService")//格式化 service 接口文件名称
                 .formatServiceImplFileName("%sServiceImpl")//格式化 service 接口文件名称
+                .enableFileOverride()
                 .build()
  
                 .controllerBuilder()//控制层策略

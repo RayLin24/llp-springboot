@@ -1,7 +1,8 @@
 package com.llp.mybatisplus.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -15,33 +16,28 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author llp
- * @since 2022年10月21日
+ * @since 2022-10-25
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("emp")
 public class Emp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableField("id")
     private Long id;
 
-    @TableField("ename")
     private String ename;
 
-    @TableField("empno")
     private Integer empno;
 
-    @TableField("create_time")
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
-    @TableField("update_time")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
-    @TableField("deleted")
-    private Boolean deleted;
-
-
+    @TableField(fill = FieldFill.INSERT)
+    @TableLogic
+    private Byte deleted;
 }

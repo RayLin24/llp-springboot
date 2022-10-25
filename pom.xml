@@ -25,7 +25,7 @@
 		<druid.boot.version>1.2.11</druid.boot.version>
 		<mybatisplus.boot.version>3.5.2</mybatisplus.boot.version>
 		<hutool.version>5.7.22</hutool.version>
-		<mybatisplus.generator.version>3.5.2</mybatisplus.generator.version>
+		<mybatisplus.generator.version>3.5.3</mybatisplus.generator.version>
 		<mybatisplus.velocity.version>2.3</mybatisplus.velocity.version>
 	</properties>
 
