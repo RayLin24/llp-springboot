@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @MapperScan(basePackages = {"com.llp.dao"})
 @SpringBootApplication
-public class RemoteShellApplication {
+public class MySqlBinlogApplication {
     public static void main(String[] args) {
-        SpringApplication.run(RemoteShellApplication.class,args);
+        SpringApplication.run(MySqlBinlogApplication.class,args);
     }
 }
