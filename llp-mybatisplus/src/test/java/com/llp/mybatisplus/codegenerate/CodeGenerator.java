@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Collections;
 
 @SpringBootTest
-public class codeGenerator {
+public class CodeGenerator {
     @Value("${spring.datasource.url}")
     String url;
     @Value("${spring.datasource.username}")
