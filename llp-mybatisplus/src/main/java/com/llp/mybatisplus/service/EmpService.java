@@ -9,7 +9,7 @@ import com.llp.mybatisplus.entity.Emp;
  * </p>
  *
  * @author llp
- * @since 2022年10月21日
+ * @since 2022-10-25
  */
 public interface EmpService extends IService<Emp> {
 
