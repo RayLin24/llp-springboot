@@ -10,6 +10,9 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * mybatisplus代码生成工具类
+ */
 public class GeneratorTools {
     public static void main(String[] args) {
         /**
