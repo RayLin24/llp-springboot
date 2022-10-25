@@ -1,10 +1,7 @@
 package com.llp.mybatisplus.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import lombok.Getter;
-import lombok.Setter;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -21,10 +18,14 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Emp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     private String ename;
@@ -39,5 +40,11 @@ public class Emp implements Serializable {
 
     @TableField(fill = FieldFill.INSERT)
     @TableLogic
-    private Byte deleted;
+    private Boolean deleted;
+
+
+    public Emp(String ename, Integer empno) {
+        this.ename = ename;
+        this.empno = empno;
+    }
 }

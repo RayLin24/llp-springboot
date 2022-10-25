@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
  */
 public class InsertSqlAnalysisOne {
     public static final String PATTERN = "yyyy-MM-dd HH:mm:ss";
+
     public static void main(String[] args) throws IOException {
         //List<String> tableNameList = Lists.list(
         //        "charge_payment_record",
@@ -29,21 +30,21 @@ public class InsertSqlAnalysisOne {
         //        "cost_detail",
         //        "charge_notice_detail",
         //        "charge_notice");
-        List<String> tableNameList = Lists.list("sys_obs");
+        List<String> tableNameList = Lists.list("bill_invoice_detail");
         //String binlogPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\mysql-bin.052393.sql";
         //拷贝的文件
         //String destFilePath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\mysql-bin.052393-NEW.sql";
 
         String sqlPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\binlog";
         String analysissqlPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\insertsql\\";
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(analysissqlPath+"sys_obs.sql"));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(analysissqlPath + "bill_invoice_detail.sql"));
         File file = new File(sqlPath);
-        if(file.isDirectory()){
+        if (file.isDirectory()) {
             File[] files = file.listFiles();
             for (File f : files) {
                 System.out.println(f.getAbsolutePath());
                 String binlogPath = f.getAbsolutePath();
-                String destFilePath = analysissqlPath+f.getName();
+                String destFilePath = analysissqlPath + f.getName();
                 //创建bufferedReader
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(binlogPath));
                 //读取
@@ -76,7 +77,7 @@ public class InsertSqlAnalysisOne {
                             String time = matcher.group(0).split("=")[1];
                             SimpleDateFormat sdf = new SimpleDateFormat(PATTERN);
                             String date = sdf.format(new Date(Long.parseLong(time) * 1000)); // 时间戳转换日期
-                            sql = sql.replaceAll(time, "'"+date+"'");
+                            sql = sql.replaceAll(time, "'" + date + "'");
                         }
                         sql = sql.replaceAll("(\\d+)=", ",");
                         sql = sql.replaceFirst(",", "");
@@ -85,12 +86,12 @@ public class InsertSqlAnalysisOne {
                         matcher = compile.matcher(sql);
                         while (matcher.find()) {
                             String group = matcher.group(0);
-                            sql = sql.replaceAll("\\("+group+"\\)","");
+                            sql = sql.replaceAll("\\(" + group + "\\)", "");
                         }
                         //start 指定表写出
-                        if(!CollectionUtils.isEmpty(tableNameList)){
-                            writeByTableList(tableNameList,sql,bufferedWriter);
-                        }else {
+                        if (!CollectionUtils.isEmpty(tableNameList)) {
+                            writeByTableList(tableNameList, sql, bufferedWriter);
+                        } else {
                             sql = ("INSERT " + sql + ");").replaceAll("\\s+", " ");
                             bufferedWriter.write(sql);
                             bufferedWriter.newLine();
@@ -105,8 +106,7 @@ public class InsertSqlAnalysisOne {
     }
 
 
-
-    public static void writeByTableList(List<String> tableNameList,String sql,BufferedWriter bufferedWriter) throws IOException {
+    public static void writeByTableList(List<String> tableNameList, String sql, BufferedWriter bufferedWriter) throws IOException {
         String[] splitArray = sql.split("\n");
         for (int j = 0; j < splitArray.length; j++) {
             String[] split1 = splitArray[0].split("\\.");
@@ -114,11 +114,13 @@ public class InsertSqlAnalysisOne {
             if (tableNameList.contains(tableName)) {
                 //System.out.println("INSERT " + substring);
                 sql = ("INSERT " + sql + ");").replaceAll("\\s+", " ");
-                //每读取一行，就写入
-                bufferedWriter.write(sql);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
-                break;
+                //if (sql.contains("MONEYAFTERINVOICE")) {
+                    //每读取一行，就写入
+                    bufferedWriter.write(sql);
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                    break;
+                //}
             }
         }
     }

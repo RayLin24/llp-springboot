@@ -14,6 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Collections;
 
+/**
+ * mybatisplus 3.5.2 代码生成器
+ */
 @SpringBootTest
 public class CodeGenerator {
     @Value("${spring.datasource.url}")
@@ -44,14 +47,13 @@ public class CodeGenerator {
                 .strategyConfig(builder -> {
                     // 设置需要生成的表名
                     builder.addInclude("emp");
-
                     //实体类策略
                     builder.entityBuilder()
                             .enableChainModel()//开启链式编程
                             .enableLombok()//开启lombok
                             //.enableTableFieldAnnotation()//开启生成实体时生成字段注解
                             .enableRemoveIsPrefix()//开启 Boolean 类型字段移除 is 前缀
-                            .idType(IdType.ASSIGN_ID) //主键策略
+                            .idType(IdType.ASSIGN_ID) //主键策略,生成主键回去数据库中核对，因此表必须先设置主键这里才会生效
                             .logicDeleteColumnName("deleted")
                             .versionColumnName("version")
                             //.addTableFills(new Column("org_id", FieldFill.INSERT))
@@ -70,17 +72,19 @@ public class CodeGenerator {
                             .enableBaseColumnList()//启用xml文件中的BaseColumnList
                             //.cache(缓存类.class)设置缓存实现类
                             .formatMapperFileName("%sMapper")//格式化Dao类名称
-                            .formatXmlFileName("%sMapper")//格式化xml文件名称
-                            .enableFileOverride();
+                            .formatXmlFileName("%sMapper");//格式化xml文件名称
+                            //.enableFileOverride();
 
                     //service文件策略
                     builder.serviceBuilder()//service文件策略
                             .formatServiceFileName("%sService")//格式化 service 接口文件名称
-                            .formatServiceImplFileName("%sServiceImpl")//格式化 service 接口文件名称
-                            .enableFileOverride();
+                            .formatServiceImplFileName("%sServiceImpl");//格式化 service 接口文件名称
+                            //.enableFileOverride();
 
                     //controller文件策略
-                    builder.controllerBuilder().enableRestStyle().enableFileOverride();
+                    builder.controllerBuilder()
+                            .enableRestStyle();
+                            //.enableFileOverride();
 
                 })
                 .templateEngine(new VelocityTemplateEngine()).execute();

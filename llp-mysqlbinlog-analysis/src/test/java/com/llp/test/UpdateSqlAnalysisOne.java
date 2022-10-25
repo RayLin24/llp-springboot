@@ -58,10 +58,10 @@ public class UpdateSqlAnalysisOne {
         //        //"charge_notice",
         //        "charge_notice_detail"
         //       );
-        List<String> tableNameList   = Lists.list("sys_obs_authority");
+        List<String> tableNameList   = Lists.list("bill_invoice_detail");
         String binlogPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\binlog";
         String analysisUpdateSqlPath = "E:\\opensource\\llp-springboot\\llp-mysqlbinlog-analysis\\src\\main\\resources\\updatesql\\";
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(analysisUpdateSqlPath+"sys_obs_authority.sql"));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(analysisUpdateSqlPath+"bill_invoice_detail.sql"));
         File file = new File(binlogPath);
         if(file.isDirectory()){
             File[] files = file.listFiles();
@@ -128,8 +128,9 @@ public class UpdateSqlAnalysisOne {
                             String group = matcher.group(0);
                             sql = sql.replaceAll("\\("+group+"\\)","");
                         }
+                        sql = sql.replaceAll("\n", "");
                         //插入一个换行
-                        bufferedWriter.write(sql.replaceAll("\n",""));
+                        bufferedWriter.write(sql);
                         bufferedWriter.newLine();
                         bufferedWriter.flush();
                     }
