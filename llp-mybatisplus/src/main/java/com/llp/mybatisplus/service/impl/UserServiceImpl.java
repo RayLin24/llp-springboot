@@ -1,6 +1,5 @@
 package com.llp.mybatisplus.service.impl;
 
-import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.llp.mybatisplus.entity.Car;
@@ -19,7 +18,7 @@ import java.util.List;
  * 2.优先级低于修饰方法
  * 3.事务问题：由于数据源信息在程序启动时进行了加载，我们可以用spring来管理事务；当然如果时分布式事务这里就不适用了
  */
-@DS(value = "master")
+//@DS(value = "master")
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     //该方法所有查询均从slave_1中查询
-    @DS(value = "slave_1")
+    //@DS(value = "slave_1")
     @Override
     public User findById(Long id) {
         User user = userMapper.findById(id);

@@ -21,6 +21,7 @@ import java.util.Collections;
 public class CodeGenerator {
     @Value("${spring.datasource.url}")
     String url;
+
     @Value("${spring.datasource.username}")
     String userName;
     @Value("${spring.datasource.password}")
@@ -46,7 +47,7 @@ public class CodeGenerator {
                         .pathInfo(Collections.singletonMap(OutputFile.xml, projectPath + "\\src\\main\\resources\\mapper")))
                 .strategyConfig(builder -> {
                     // 设置需要生成的表名
-                    builder.addInclude("emp");
+                    builder.addInclude("storage");
                     //实体类策略
                     builder.entityBuilder()
                             .enableChainModel()//开启链式编程
