@@ -44,7 +44,7 @@ public class RemoveTest {
     //boolean removeByMap(Map<String, Object> columnMap);
     @Test
     void removeByMap() {
-        // 根据列的值删除
+        // 根据列的值删除, key-数据库列名,value-值
         Map<String, Object> cms = new HashMap();
         cms.put("empname", "李四");
         cms.put("empno", 123);
@@ -59,7 +59,7 @@ public class RemoveTest {
         // 根据主键id批量删除
         List<Long> ids = Arrays.asList(new Long[]{1584824844783042561L, 1584824844774653955L, 1584824299863195650L});
         boolean removeByIds = empService.removeByIds(ids);
-        log.info("根据主键ids批量删除用户数据：", removeByIds);
+        log.info("根据主键ids批量删除用户数据:{}", removeByIds);
     }
 
 }

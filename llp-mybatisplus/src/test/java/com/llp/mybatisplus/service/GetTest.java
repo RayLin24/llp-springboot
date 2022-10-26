@@ -17,10 +17,6 @@ public class GetTest {
     @Autowired
     private EmpService empService;
 
-    //// 根据 Wrapper，查询一条记录
-    //Map<String, Object> getMap(Wrapper<T> queryWrapper);
-    //// 根据 Wrapper，查询一条记录
-    //<V> V getObj(Wrapper<T> queryWrapper, Function<? super Object, V> mapper);
 
     // 根据 ID 查询
     // T getById(Serializable id);
@@ -56,6 +52,8 @@ public class GetTest {
     }
 
     // 查询单条数据 以Map的方式返回
+    // 根据 Wrapper，查询一条记录
+    //Map<String, Object> getMap(Wrapper<T> queryWrapper);
     //SELECT id,ename,empno,create_time,update_time,deleted FROM emp WHERE deleted=0 AND (id = ?)
     @Test
     void getMap() {
@@ -68,6 +66,7 @@ public class GetTest {
     }
 
     // 查询返回结果的第一列
+    //<V> V getObj(Wrapper<T> queryWrapper, Function<? super Object, V> mapper);
     //SELECT ename FROM emp WHERE deleted=0 AND (ename LIKE ?)
     @Test
     void getObj() {
