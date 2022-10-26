@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 100513
  Source Host           : localhost:3306
- Source Schema         : mybatisplus
+ Source Schema         : mp2
 
  Target Server Type    : MySQL
  Target Server Version : 100513
  File Encoding         : 65001
 
- Date: 26/10/2022 16:14:41
+ Date: 26/10/2022 16:14:46
 */
 
 SET NAMES utf8mb4;
@@ -138,30 +138,6 @@ INSERT INTO `emp` VALUES (1584836016366247937, 'wc', 7788, '2022-10-25 17:15:25'
 INSERT INTO `emp` VALUES (1585087814347796481, 'wangchuan', 123, '2022-10-26 09:55:59', '2022-10-26 10:09:45', 0);
 
 -- ----------------------------
--- Table structure for storage
--- ----------------------------
-DROP TABLE IF EXISTS `storage`;
-CREATE TABLE `storage`  (
-  `id` bigint(20) NOT NULL,
-  `product_id` bigint(20) NULL DEFAULT NULL,
-  `amount` int(11) NULL DEFAULT NULL COMMENT '库存量',
-  `version` int(11) NULL DEFAULT NULL COMMENT '版本号',
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  `deleted` tinyint(1) NULL DEFAULT NULL,
-  `tenant_id` bigint(20) NULL DEFAULT NULL COMMENT '租户id',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_german2_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of storage
--- ----------------------------
-INSERT INTO `storage` VALUES (1585169951533146114, 123, 9997, 2, '2022-10-26 15:22:22', '2022-10-26 15:28:48', 0, 2);
-INSERT INTO `storage` VALUES (1585170317796483073, 123, 10000, 0, '2022-10-26 15:23:49', '2022-10-26 15:23:49', 0, 2);
-INSERT INTO `storage` VALUES (1585171040315727873, 123, 10000, NULL, '2022-10-26 15:26:41', '2022-10-26 15:26:41', 0, 2);
-INSERT INTO `storage` VALUES (1585173736875745282, 123, 10000, NULL, '2022-10-26 15:37:24', '2022-10-26 15:37:24', 0, 1);
-
--- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -222,7 +198,7 @@ INSERT INTO `user` VALUES (1583376240948129794, 'wu38', 10, '10@qq.com', '2022-1
 INSERT INTO `user` VALUES (1583376240956518402, 'wu39', 10, '10@qq.com', '2022-10-21 16:34:48', '2022-10-21 16:34:48', '{\"id\":null,\"name\":\"兰博基尼\",\"price\":10000000.02221234,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
 INSERT INTO `user` VALUES (1583376240964907010, 'wu40', 10, '10@qq.com', '2022-10-21 16:34:48', '2022-10-21 16:34:48', '{\"id\":null,\"name\":\"兰博基尼\",\"price\":10000000.02221234,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
 INSERT INTO `user` VALUES (1583376240973295617, 'wu41', 10, '10@qq.com', '2022-10-21 16:34:48', '2022-10-21 16:34:48', '{\"id\":null,\"name\":\"兰博基尼\",\"price\":10000000.02221234,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
-INSERT INTO `user` VALUES (1583376240981684225, 'wu42', 10, '10@qq.com', '2022-10-21 16:34:48', '2022-10-21 16:34:48', '{\"id\":null,\"name\":\"兰博基尼\",\"price\":10000000.02221234,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
+INSERT INTO `user` VALUES (1583376240981684225, 'wu42-slave1', 10, '10@qq.com', '2022-10-21 16:34:48', '2022-10-21 16:34:48', '{\"id\":null,\"name\":\"兰博基尼\",\"price\":10000000.02221234,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
 INSERT INTO `user` VALUES (1583376240990072834, 'wu43', 10, '10@qq.com', '2022-10-21 16:34:48', '2022-10-21 16:34:48', '{\"id\":null,\"name\":\"兰博基尼\",\"price\":10000000.02221234,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
 INSERT INTO `user` VALUES (1583376240998461441, 'wu44', 10, '10@qq.com', '2022-10-21 16:34:48', '2022-10-21 16:34:48', '{\"id\":null,\"name\":\"兰博基尼\",\"price\":10000000.02221234,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
 INSERT INTO `user` VALUES (1583376240998461443, 'wu45', 10, '10@qq.com', '2022-10-21 16:34:48', '2022-10-21 16:34:48', '{\"id\":null,\"name\":\"兰博基尼\",\"price\":10000000.02221234,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
@@ -231,6 +207,6 @@ INSERT INTO `user` VALUES (1583376241015238658, 'wu47', 10, '10@qq.com', '2022-1
 INSERT INTO `user` VALUES (1583376241023627267, 'wu48', 10, '10@qq.com', '2022-10-21 16:34:48', '2022-10-21 16:34:48', '{\"id\":null,\"name\":\"兰博基尼\",\"price\":10000000.02221234,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
 INSERT INTO `user` VALUES (1583376241032015873, 'wu49', 10, '10@qq.com', '2022-10-21 16:34:48', '2022-10-21 16:34:48', '{\"id\":null,\"name\":\"兰博基尼\",\"price\":10000000.02221234,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
 INSERT INTO `user` VALUES (1585103765902491649, 'lisi', 23, '123@qq.com', '2022-10-26 10:59:22', '2022-10-26 10:59:22', '{\"id\":null,\"name\":\"法拉利\",\"price\":1000000,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
-INSERT INTO `user` VALUES (1585104735172640770, 'lisi1-master', 23, '123@qq.com', '2022-10-26 11:03:13', '2022-10-26 11:03:13', '{\"id\":null,\"name\":\"法拉利\",\"price\":1000000,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
+INSERT INTO `user` VALUES (1585104735172640770, 'lisi1', 23, '123@qq.com', '2022-10-26 11:03:13', '2022-10-26 11:03:13', '{\"id\":null,\"name\":\"法拉利\",\"price\":1000000,\"createTime\":null,\"updateTime\":null,\"deleted\":null,\"userId\":null}', 0, 'NORMAL');
 
 SET FOREIGN_KEY_CHECKS = 1;
