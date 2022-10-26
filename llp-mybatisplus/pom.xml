@@ -44,7 +44,12 @@
 			<artifactId>p6spy</artifactId>
 			<version>3.9.1</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+			<version>3.5.0</version>
+		</dependency>
+		<!--Mp多数据源-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
