@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.llp.mybatisplus.mapper.UserMapper">
+	<resultMap id="BaseResultMap" type="com.llp.mybatisplus.entity.User">
+		<!--@mbg.generated-->
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="age" property="age"/>
+		<result column="email" property="email"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+		<!--字段类型处理器:用于 JavaType 与 JdbcType 之间的转换 数据库中保存的car是json字符串，则查询结果要映射为car对象，需要配置字段处理器进行转换-->
+		<result column="car" jdbcType="VARCHAR" property="car"
+		        typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+
+		<result column="deleted" property="deleted"/>
+		<result column="status" property="status"/>
+	</resultMap>
+
+	<select id="findById" resultMap="BaseResultMap">
+		select * from user where id = #{id}
+	</select>
+</mapper>

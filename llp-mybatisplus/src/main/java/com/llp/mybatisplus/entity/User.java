@@ -2,6 +2,7 @@ package com.llp.mybatisplus.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import com.llp.mybatisplus.constant.StatusEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -35,4 +36,6 @@ public class User {
     private Car car;
     @TableField(fill = FieldFill.INSERT)
     private Boolean deleted;
+
+    private StatusEnum status;
 }

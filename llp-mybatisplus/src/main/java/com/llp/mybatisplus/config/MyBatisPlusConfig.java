@@ -5,11 +5,25 @@ import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MyBatisPlusConfig {
+
+    /**
+     * 全局配置：序列化枚举值为数据库存储值
+     * 从数据库获取到的数据映射未枚举类型时，反序列化时全局配置取枚举toString返回的值
+     * @return
+     */
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer customizer(){
+        //disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+        return builder -> builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+    }
+
 
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor(){
