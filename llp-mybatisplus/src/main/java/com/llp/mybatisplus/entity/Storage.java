@@ -1,8 +1,7 @@
 package com.llp.mybatisplus.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -16,8 +15,7 @@ import java.time.LocalDateTime;
  * @author llp
  * @since 2022-10-26
  */
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
 public class Storage implements Serializable {
 
