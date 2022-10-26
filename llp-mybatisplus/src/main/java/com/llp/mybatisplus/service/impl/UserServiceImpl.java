@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
+ * dynamic-datasource-spring-boot-starter 多数据源属于独立的模块，并不依赖于mybatisplus其他依赖，可以单独使用
  * 1.修饰类表示改类的所有方法均从master库查询
  * 2.优先级低于修饰方法
  * 3.事务问题：由于数据源信息在程序启动时进行了加载，我们可以用spring来管理事务；当然如果时分布式事务这里就不适用了
