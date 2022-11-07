@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@SuppressWarnings({"all"})
 @RestController
 public class ProducerController {
     //模板，帮助我们去获取连接；感情自然流露：redisTemplate kafkaTemplate rabbitTemplate  jdbcTemplate
@@ -25,6 +26,9 @@ public class ProducerController {
     @Value(value = "${transaction.group}")
     private String transactionGroup;
 
+    /**
+     * 事务消息
+     */
     @RequestMapping("/sendTransactionMsg")
     public void sendTransactionMsg() {
         User user = new User("llp", "110");
@@ -55,6 +59,10 @@ public class ProducerController {
     //}
 
 
+    /**
+     * 单向消息
+     * @return
+     */
     @RequestMapping("/sendOneWay")
     public String sendOneWay() {
         User user = new User("llp", "110");
@@ -86,6 +94,10 @@ public class ProducerController {
         return JSON.toJSONString(user);
     }
 
+    /**
+     * 异步消息
+     * @return
+     */
     @RequestMapping("/syncSend")
     public String syncSend() {
         User user = new User("llp", "110");
@@ -118,6 +130,9 @@ public class ProducerController {
         //rocketmq-spring-boot-starter依赖中包含了fastJson
         return JSON.toJSONString(user);
     }
+
+
+
 
 
 }

@@ -20,17 +20,3 @@ rocketmq:
 transaction:
   group: llp-transaction
 
-
-
-
-# 发送时间超时时间
-  rocketmq.producer.send-message-timeout=300000
-  #异步消息发送失败重试次数
-  rocketmq.producer.retry-times-when-send-async-failed=0
-  #消息发送失败后的最大重试次数
-  rocketmq.producer.retry-times-when-send-failed=2
-  #消息Body超过多大开始压缩（Consumer收到消息会自动解压缩），单位字节
-  rocketmq.producer.compress-message-body-threshold=4096
-  #消息最大容量
-  rocketmq.producer.max-message-size=4194304
-  rocketmq.producer.retry-next-server=true
