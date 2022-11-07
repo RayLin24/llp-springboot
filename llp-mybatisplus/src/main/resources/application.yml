@@ -9,7 +9,12 @@ spring:
     url: jdbc:p6spy:mysql://localhost:3306/mybatisplus?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8&allowMultiQueries=true
     username: root
     password: root
+    #针对Date类型时间,格式化处理
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss
+#    time-zone: GMT+8
 
+############## Mybatisplus多数据源配置 ##############
 #spring:
 #  datasource:
 #    dynamic:

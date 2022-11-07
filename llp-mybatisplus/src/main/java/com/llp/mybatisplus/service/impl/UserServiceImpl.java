@@ -2,6 +2,7 @@ package com.llp.mybatisplus.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.llp.mybatisplus.entity.Car;
 import com.llp.mybatisplus.entity.User;
 import com.llp.mybatisplus.mapper.CarMapper;
@@ -22,7 +23,9 @@ import java.util.List;
 //@DS(value = "master")
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+@SuppressWarnings({"all"})
+public class UserServiceImpl extends ServiceImpl<UserMapper, User>  implements UserService{
+
 
     private final UserMapper userMapper;
     private final CarMapper carMapper;

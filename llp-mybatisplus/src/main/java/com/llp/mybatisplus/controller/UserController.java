@@ -37,4 +37,9 @@ public class UserController {
         return userService.findByName(name);
     }
 
+    @ApiOperation("保存")
+    @PostMapping("/save")
+    public void save(@RequestBody User user){
+        userService.save(user);
+    }
 }
