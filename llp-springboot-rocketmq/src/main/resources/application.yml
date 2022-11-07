@@ -1,0 +1,36 @@
+rocketmq:
+  #指定nameserver地址,如果是集群多个服务器之间用分号隔开
+  name-server: 192.168.79.203:9876;192.168.79.204:9876
+  producer:
+    #指定消费者组名
+    group: llp2
+    send-message-timeout: 30000
+    #消息发送失败后的最大重试次数
+    retry-times-when-send-failed: 2
+    #默认 4KB
+    compress-message-body-threshold: 4096
+    #默认 4M
+    max-message-size: 4194304
+    #异步消息发送失败重试次数
+    retry-times-when-send-async-failed: 2
+    #指示是否在内部发送失败时重试另一个代理
+    retry-next-server: true
+
+
+transaction:
+  group: llp-transaction
+
+
+
+
+# 发送时间超时时间
+  rocketmq.producer.send-message-timeout=300000
+  #异步消息发送失败重试次数
+  rocketmq.producer.retry-times-when-send-async-failed=0
+  #消息发送失败后的最大重试次数
+  rocketmq.producer.retry-times-when-send-failed=2
+  #消息Body超过多大开始压缩（Consumer收到消息会自动解压缩），单位字节
+  rocketmq.producer.compress-message-body-threshold=4096
+  #消息最大容量
+  rocketmq.producer.max-message-size=4194304
+  rocketmq.producer.retry-next-server=true
