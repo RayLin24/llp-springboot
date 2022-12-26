@@ -11,6 +11,7 @@
 		<module>llp-mysqlbinlog-analysis</module>
 		<module>llp-mybatisplus</module>
 		<module>llp-springboot-rocketmq</module>
+		<module>llp-Spring-Retry</module>
 	</modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>
