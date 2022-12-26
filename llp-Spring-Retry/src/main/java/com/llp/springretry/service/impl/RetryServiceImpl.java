@@ -56,6 +56,8 @@ public class RetryServiceImpl implements RetryService {
      */
     @Recover
     public int recover(Exception e, int code){
+        //这里的code就是retry方法的入参
+        System.out.println(code);
         System.out.println("回调方法执行！！！！");
         //记日志到数据库 或者调用其余的方法
         System.out.println("异常信息:"+e.getMessage());
