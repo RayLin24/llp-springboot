@@ -12,8 +12,9 @@
 		<module>llp-mybatisplus</module>
 		<module>llp-springboot-rocketmq</module>
 		<module>llp-Spring-Retry</module>
-		<module>llp-test</module>
 		<module>llp-easyexcel</module>
+		<module>llp-redis</module>
+		<module>llp-xxljob</module>
 	</modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>
