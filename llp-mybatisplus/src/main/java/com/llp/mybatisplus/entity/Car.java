@@ -1,37 +1,94 @@
 package com.llp.mybatisplus.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-import lombok.Data;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
-//autoResultMap 自动构建resultMap
-@TableName(value = "car", autoResultMap = true)
-@Data
-public class Car {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author llp
+ * @since 2023-03-01
+ */
+public class Car implements Serializable {
 
-    @TableId(type = IdType.ASSIGN_ID)
+    private static final long serialVersionUID = 1L;
     private Long id;
-
     private String name;
-
-    /**
-     * 指定小数点后保留的位数,
-     * 只生效于 mp 自动注入的 method,
-     * 建议配合 {@link TableName#autoResultMap()} 一起使用
-     */
-    @TableField(numericScale = "2")
     private BigDecimal price;
-
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    @TableField(fill = FieldFill.INSERT)
-    private Boolean deleted;
-
+    private Date createTime;
+    private Date updateTime;
+    private Byte deleted;
     private Long userId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Byte getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Byte deleted) {
+        this.deleted = deleted;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+        ", id = " + id +
+        ", name = " + name +
+        ", price = " + price +
+        ", createTime = " + createTime +
+        ", updateTime = " + updateTime +
+        ", deleted = " + deleted +
+        ", userId = " + userId +
+        "}";
+    }
 }

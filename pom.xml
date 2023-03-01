@@ -15,6 +15,8 @@
 		<module>llp-easyexcel</module>
 		<module>llp-redis</module>
 		<module>llp-xxljob</module>
+		<module>llp-test</module>
+		<module>llp-mybatis-plus-generator-ui</module>
 	</modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>
@@ -28,7 +30,7 @@
 		<lombok.version>1.18.20</lombok.version>
 		<mysql.version>5.1.47</mysql.version>
 		<druid.boot.version>1.2.11</druid.boot.version>
-		<mybatisplus.boot.version>3.5.2</mybatisplus.boot.version>
+		<mybatisplus.boot.version>3.5.3</mybatisplus.boot.version>
 		<hutool.version>5.7.22</hutool.version>
 		<mybatisplus.generator.version>3.5.3</mybatisplus.generator.version>
 		<mybatisplus.velocity.version>2.3</mybatisplus.velocity.version>
