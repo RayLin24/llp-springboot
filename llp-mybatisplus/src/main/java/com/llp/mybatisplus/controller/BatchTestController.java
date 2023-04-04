@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -37,6 +38,9 @@ public class BatchTestController {
     @Autowired
     private EmpService empService;
 
+    @Autowired
+    private EmpMapper empMapper;
+
     @ApiOperation("批量插入测试")
     @Transactional
     @PostMapping("/insert")
@@ -54,10 +58,10 @@ public class BatchTestController {
         // 批量插入,默认每次提交数量int DEFAULT_BATCH_SIZE = 1000; （每1000条数据提交一次事务）
         empService.saveBatch(arrayList);
         stopWatch.stop();
+        //插入数据消耗时间：4404毫秒
         return "插入数据消耗时间：" + stopWatch.getTotalTimeMillis() + "毫秒";
     }
 
-    @Transactional
     @ApiOperation("关闭自动提交事务-批处理")
     @GetMapping("/forSaveBatch")
     public String forSaveBatch() {
@@ -78,6 +82,25 @@ public class BatchTestController {
         // 关闭资源
         sqlSession.close();
         long endTime = System.currentTimeMillis();
+        //总耗时： 4396毫秒
+        return "总耗时： " + (endTime - startTime) + "毫秒";
+    }
+
+
+    @ApiOperation("关闭自动提交事务-批处理")
+    @GetMapping("/batch")
+    public String batch() {
+        long startTime = System.currentTimeMillis();
+        List<Emp> empList = new ArrayList<>();
+        for (int i = 0; i < 50000; i++) {
+            Emp emp = new Emp();
+            emp.setEname("zhangsan" + i);
+            emp.setEmpno(new Random().nextInt(400));
+            empList.add(emp);
+        }
+        empMapper.insertBatchSomeColumn(empList);
+        long endTime = System.currentTimeMillis();
+        //总耗时： 4129毫秒
         return "总耗时： " + (endTime - startTime) + "毫秒";
     }
 

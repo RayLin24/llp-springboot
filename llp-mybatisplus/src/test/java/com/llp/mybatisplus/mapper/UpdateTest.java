@@ -32,7 +32,8 @@ public class UpdateTest {
         Emp emp = new Emp();
         emp.setId(1585087814347796481L);
         emp.setEname("wangchuan");
-        emp.setEmpno(123);
+        emp.setEmpno(null);
+        //UPDATE emp SET ename = 'wangchuan', update_time = '2023-03-24T09:27:53.756' WHERE id = 1585087814347796481 AND deleted = 0
         //UPDATE emp SET ename=?, empno=?, update_time=? WHERE id=? AND deleted=0
         int i = empMapper.updateById(emp);
     }

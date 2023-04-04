@@ -1,5 +1,8 @@
 package com.llp.redis.controller;
 
+import com.llp.redis.lock.byanno.anno.RedisLockAnnotation;
+import com.llp.redis.lock.byanno.constans.RedisLockTypeEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.util.StringUtils;
@@ -14,6 +17,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @RestController
 @RequestMapping("/redisTest")
 public class RedisTestController {
@@ -122,4 +126,20 @@ public class RedisTestController {
         }
     }
 
+
+    //基于注解实现Redis分布式锁
+    @GetMapping("/testAnnotationLock")
+    @RedisLockAnnotation(typeEnum = RedisLockTypeEnum.ONE, lockTime = 3)
+    public String testAnnotationLock(){
+        try {
+            log.info("睡眠执行前");
+            Thread.sleep(5000);
+            log.info("睡眠执行后");
+        } catch (Exception e) {
+            // log error
+            log.info("has some error", e);
+            return "fail";
+        }
+        return "success";
+    }
 }

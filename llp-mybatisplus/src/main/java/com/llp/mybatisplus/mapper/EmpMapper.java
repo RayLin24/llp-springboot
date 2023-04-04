@@ -1,6 +1,6 @@
 package com.llp.mybatisplus.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.llp.mybatisplus.common.CommonMapper;
 import com.llp.mybatisplus.entity.Emp;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-10-25
  */
 @Mapper
-public interface EmpMapper extends BaseMapper<Emp> {
+public interface EmpMapper extends CommonMapper<Emp> {
 
 }

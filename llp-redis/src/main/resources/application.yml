@@ -1,7 +1,8 @@
 spring:
   redis:
-    host: 192.168.79.202
+    host: 192.168.39.118
     port: 6379
+    password: ryd123
     #Redis 数据库索引（默认为 0）
     database: 0
     #连接超时时间（毫秒）
@@ -14,4 +15,5 @@ spring:
         max-wait: -1
         #连接池中的最大空闲连接
         min-idle: 0
-        #密码
+
+

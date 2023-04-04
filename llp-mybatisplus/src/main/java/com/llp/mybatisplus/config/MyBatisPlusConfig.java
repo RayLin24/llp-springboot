@@ -18,19 +18,29 @@ import org.springframework.context.annotation.Configuration;
 public class MyBatisPlusConfig {
 
     /**
-     * 全局配置：序列化枚举值为数据库存储值
-     * 从数据库获取到的数据映射未枚举类型时，反序列化时全局配置取枚举toString返回的值
+     * 将自定义的sql注入器注入到Mybatis容器中
      * @return
      */
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer customizer(){
+    public MySqlInjector sqlInjector() {
+        return new MySqlInjector();
+    }
+
+    /**
+     * 全局配置：序列化枚举值为数据库存储值
+     * 从数据库获取到的数据映射未枚举类型时，反序列化时全局配置取枚举toString返回的值
+     *
+     * @return
+     */
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer customizer() {
         //disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
         return builder -> builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
     }
 
 
     @Bean
-    public MybatisPlusInterceptor mybatisPlusInterceptor(){
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         //防止全表更新删除操作插件，当全表操作时会抛出  Cause: com.baomidou.mybatisplus.core.exceptions.MybatisPlusException: Prohibition of table update operation 异常
         interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
@@ -45,12 +55,14 @@ public class MyBatisPlusConfig {
             public Expression getTenantId() {
                 return new LongValue(1);
             }
+
             // 对应数据库租户ID的列名
             @Override
             public String getTenantIdColumn() {
                 // 对应数据库租户ID的列名
                 return "tenant_id";
             }
+
             /**
              * 这是 default 方法,默认返回 false 表示所有表都需要拼多租户条件
              * ignoreTable标识忽略的表
