@@ -1,6 +1,7 @@
 package com.llp.mybatisplus.service;
 
 import com.llp.mybatisplus.entity.Emp;
+import com.llp.mybatisplus.service.impl.MyService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,6 +51,13 @@ public class SaveTest {
             empList.add(emp);
         }
         empService.saveBatch(empList,2);
+    }
+
+    @Autowired
+    private MyService myService;
+    @Test
+    public void saveTest(){
+        myService.myBusinessMethod();
     }
 
 }

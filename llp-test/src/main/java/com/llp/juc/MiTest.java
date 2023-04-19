@@ -1,27 +1,55 @@
 package com.llp.juc;
 
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class MiTest {
-    public static void main(String[] args) throws ExecutionException, InterruptedException, IOException {
-        // 必须设置队列的长度
-        LinkedBlockingQueue queue = new LinkedBlockingQueue(4);
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        //1. 构建线程池
+        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
+                2,
+                5,
+                10,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(5),
+                new ThreadFactory() {
+                    @Override
+                    public Thread newThread(Runnable r) {
+                        Thread thread = new Thread(r);
+                        thread.setName("test-ThreadPoolExecutor");
+                        return thread;
+                    }
+                },
+                new MyRejectedExecution()
+        );
 
-        // 生产者扔数据
-        queue.add("1");
-        queue.offer("2");
-        queue.offer("3",2, TimeUnit.SECONDS);
-        queue.put("2");
-        queue.offer("4",1, TimeUnit.SECONDS);
+        //2. 让线程池处理任务,没返回结果
+        threadPool.execute(() -> {
+            System.out.println("没有返回结果的任务");
+        });
 
-        // 消费者取数据
-        System.out.println(queue.remove());
-        System.out.println(queue.poll());
-        System.out.println(queue.poll(2,TimeUnit.SECONDS));
-        System.out.println(queue.take());
-        System.out.println(queue.poll());
+        //3. 让线程池处理有返回结果的任务
+        Future<Object> future = threadPool.submit(new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                System.out.println("我有返回结果！");
+                return "返回结果";
+            }
+        });
+        Object result = future.get();
+        System.out.println(result);
+
+        //4. 如果是局部变量的线程池，记得用完要shutdown
+        threadPool.shutdown();
     }
+
+
+
+    private static class MyRejectedExecution implements RejectedExecutionHandler{
+        @Override
+        public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+            System.out.println("根据自己的业务情况，决定编写的代码！");
+        }
+    }
+
+
 }
