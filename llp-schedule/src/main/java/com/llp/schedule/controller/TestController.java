@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     private final ScheduleTask scheduleTask;
+
     private final IntervalScheduleTask intervalScheduleTask;
 
     @GetMapping("/updateCron")
