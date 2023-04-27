@@ -19,6 +19,7 @@
 		<module>llp-mybatis-plus-generator-ui</module>
 		<module>llp-spring-event</module>
 		<module>llp-schedule</module>
+		<module>llp-rabbitmq</module>
 	</modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>

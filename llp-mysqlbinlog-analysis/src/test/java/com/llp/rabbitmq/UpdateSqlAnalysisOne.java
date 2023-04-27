@@ -1,4 +1,4 @@
-package com.llp.test;
+package com.llp.rabbitmq;
 
 import com.llp.dao.FileMapper;
 import org.assertj.core.util.Lists;

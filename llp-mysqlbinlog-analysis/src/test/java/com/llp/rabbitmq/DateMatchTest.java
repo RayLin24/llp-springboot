@@ -1,4 +1,4 @@
-package com.llp.test;
+package com.llp.rabbitmq;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
