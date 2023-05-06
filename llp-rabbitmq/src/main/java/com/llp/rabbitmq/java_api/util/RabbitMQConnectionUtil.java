@@ -5,7 +5,7 @@ import com.rabbitmq.client.ConnectionFactory;
 
 public class RabbitMQConnectionUtil {
 
-    public static final String RABBITMQ_HOST = "192.168.109.102";
+    public static final String RABBITMQ_HOST = "192.168.79.101";
 
     public static final int RABBITMQ_PORT = 5672;
 

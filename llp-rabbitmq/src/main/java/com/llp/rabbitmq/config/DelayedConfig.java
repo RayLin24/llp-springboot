@@ -20,7 +20,9 @@ public class DelayedConfig {
     @Bean
     public Exchange delayedExchange(){
         Map<String, Object> arguments = new HashMap<>();
+        //执行交换机的类型：direct、fanout、headers、topic
         arguments.put("x-delayed-type","topic");
+        //param1:交换机名称  param2交换机类型
         Exchange exchange = new CustomExchange(DELAYED_EXCHANGE,"x-delayed-message",true,false,arguments);
         return exchange;
     }

@@ -15,7 +15,6 @@
 		<module>llp-easyexcel</module>
 		<module>llp-redis</module>
 		<module>llp-xxljob</module>
-		<module>llp-test</module>
 		<module>llp-mybatis-plus-generator-ui</module>
 		<module>llp-spring-event</module>
 		<module>llp-schedule</module>

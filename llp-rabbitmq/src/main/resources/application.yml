@@ -1,9 +1,7 @@
 spring:
   #rabbitmq 配置
   rabbitmq:
-    publisher-confirm-type: correlated #新版本
-    #publisher-confirms: true 老版本
-    host: 192.168.109.102
+    host: 192.168.79.101
     username: guest
     password: guest
     #虚拟主机
@@ -42,3 +40,6 @@ spring:
         #理失败后，等待多长时间再尝试重新发送消息。这个参数的默认值是 1 秒。
         #2.max-interval（最大间隔时间）：表示重试过程中的最大时间间隔，也就是每次重试时，
         #最长等待多长时间再尝试重新发送消息。这个参数的默认值是 10 秒。
+    publisher-returns: true # 开启Return机制
+    publisher-confirm-type: correlated #开启Confirm机制
+    #publisher-confirms: true 老版本
