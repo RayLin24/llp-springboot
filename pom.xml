@@ -19,6 +19,8 @@
 		<module>llp-spring-event</module>
 		<module>llp-schedule</module>
 		<module>llp-rabbitmq</module>
+		<module>llp-elasticsearch</module>
+		<module>llp-springsecurity</module>
 	</modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: service-search
+
+llp:
+  elasticsearch:
+    hostlist: 127.0.0.1:9200 #\u591A\u4E2A\u7ED3\u70B9\u4E2D\u95F4\u7528\u9017\u53F7\u5206\u9694
