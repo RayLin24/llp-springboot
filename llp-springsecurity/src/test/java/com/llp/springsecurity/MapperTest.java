@@ -1,6 +1,8 @@
 package com.llp.springsecurity;
 
+import com.llp.springsecurity.domain.Menu;
 import com.llp.springsecurity.domain.User;
+import com.llp.springsecurity.mapper.MenuMapper;
 import com.llp.springsecurity.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,15 @@ public class MapperTest {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private MenuMapper menuMapper;
+
+    @Test
+    public void menuMapperTest(){
+        List<Menu> menus = menuMapper.selectList(null);
+        System.out.println(menus);
+    }
 
     @Test
     public void testBCryptPasswordEncoder(){

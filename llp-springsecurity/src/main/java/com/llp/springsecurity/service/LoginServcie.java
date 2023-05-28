@@ -5,4 +5,6 @@ import com.llp.springsecurity.domain.User;
 
 public interface LoginServcie {
     ResponseResult login(User user);
+
+    ResponseResult logout();
 }

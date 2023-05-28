@@ -3,6 +3,7 @@ package com.llp.springsecurity.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.llp.springsecurity.domain.LoginUser;
 import com.llp.springsecurity.domain.User;
+import com.llp.springsecurity.mapper.MenuMapper;
 import com.llp.springsecurity.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -17,6 +19,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private MenuMapper menuMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -28,9 +33,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(Objects.isNull(user)){
             throw new RuntimeException("用户名或密码错误");
         }
-        //TODO 根据用户查询权限信息 添加到LoginUser中
-
+        List<String> permissions = menuMapper.selectPermsByUserId(user.getId());
+        //模拟权限
         //封装成UserDetails对象返回
-        return new LoginUser(user);
+        return new LoginUser(user,permissions);
     }
 }

@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class LoginServiceImpl implements LoginServcie {
@@ -35,10 +37,19 @@ public class LoginServiceImpl implements LoginServcie {
         String userId = loginUser.getUser().getId().toString();
         String jwt = JwtUtil.createJWT(userId);
         //authenticate存入redis
-        redisCache.setCacheObject("login:"+userId,loginUser);
+        redisCache.setCacheObject("login:"+userId,loginUser,30, TimeUnit.MINUTES);
         //把token响应给前端
         HashMap<String,String> map = new HashMap<>();
         map.put("token",jwt);
         return new ResponseResult(200,"登陆成功",map);
+    }
+
+    @Override
+    public ResponseResult logout() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser)authentication.getPrincipal();
+        User user = loginUser.getUser();
+        redisCache.deleteObject("login:"+user.getId());
+        return new ResponseResult(200,"退出成功");
     }
 }

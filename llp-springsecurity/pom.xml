@@ -38,6 +38,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+		<!-- spring2.X 集成 redis 所需 common-pool-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<!--不要带版本号,防止冲突-->
+		</dependency>
 		<!--fastjson依赖-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
