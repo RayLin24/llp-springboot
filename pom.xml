@@ -24,6 +24,7 @@
 		<module>MyTest</module>
 		<module>llp-crypto</module>
 		<module>llp-minio</module>
+		<module>llp-cache-redis</module>
 	</modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>
