@@ -21,7 +21,6 @@
 		<module>llp-rabbitmq</module>
 		<module>llp-elasticsearch</module>
 		<module>llp-springsecurity</module>
-		<module>MyTest</module>
 		<module>llp-crypto</module>
 		<module>llp-minio</module>
 		<module>llp-cache-redis</module>
