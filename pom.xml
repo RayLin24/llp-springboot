@@ -24,6 +24,7 @@
 		<module>llp-crypto</module>
 		<module>llp-minio</module>
 		<module>llp-cache-redis</module>
+		<module>llp-mapstruct</module>
 	</modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>
