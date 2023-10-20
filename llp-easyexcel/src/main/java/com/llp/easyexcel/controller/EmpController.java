@@ -21,15 +21,14 @@ public class EmpController {
 
     @GetMapping("/importData")
     public void importData() {
+        System.out.println("------开始执行批量导入------");
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
         String fileName = "C:\\Users\\asus\\Desktop\\员工信息.xlsx";
         //记录开始读取Excel时间,也是导入程序开始时间
-        long startReadTime = System.currentTimeMillis();
-        System.out.println("------开始读取Excel的Sheet时间(包括导入数据过程):" + startReadTime + "ms------");
         //读取所有Sheet的数据.每次读完一个Sheet就会调用这个方法
         EasyExcel.read(fileName, new EasyExceGeneralDatalListener(empService)).doReadAll();
-        long endReadTime = System.currentTimeMillis();
-        System.out.println("------结束读取Excel的Sheet时间(包括导入数据过程):" + endReadTime + "ms------");
-        System.out.println("------读取Excel的Sheet时间(包括导入数据)共计耗时:" + (endReadTime-startReadTime) + "ms------");
+        System.out.println("导入共计耗时： " + stopWatch.getTotalTimeSeconds()+"S");
     }
 
     /**
@@ -41,7 +40,7 @@ public class EmpController {
         stopWatch.start();
         empService.export();
         stopWatch.stop();
-        System.out.println("共计耗时： " + stopWatch.getTotalTimeSeconds()+"S");
+        System.out.println("导出共计耗时： " + stopWatch.getTotalTimeSeconds()+"S");
     }
 
 

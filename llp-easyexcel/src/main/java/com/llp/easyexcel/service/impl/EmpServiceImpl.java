@@ -82,6 +82,8 @@ public class EmpServiceImpl implements EmpService {
                             .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy()).build();
                     // 写数据
                     excelWriter.write(empVoList, writeSheet);
+                    empVoList.clear();
+                    empList.clear();
                 }
             }
             // 下载EXCEL
@@ -116,8 +118,6 @@ public class EmpServiceImpl implements EmpService {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
-            long startTime = System.currentTimeMillis();
-            System.out.println(dataList.size() + "条,开始导入到数据库时间:" + startTime + "ms");
             conn = JDBCDruidUtils.getConnection();
             // 控制事务:默认不提交
             conn.setAutoCommit(false);
@@ -142,9 +142,6 @@ public class EmpServiceImpl implements EmpService {
             ps.executeBatch();
             // 手动提交事务
             conn.commit();
-            long endTime = System.currentTimeMillis();
-            System.out.println(dataList.size() + "条,结束导入到数据库时间:" + endTime + "ms");
-            System.out.println(dataList.size() + "条,导入用时:" + (endTime - startTime) + "ms");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
