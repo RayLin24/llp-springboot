@@ -10,7 +10,7 @@
 	<modules>
 		<module>llp-mysqlbinlog-analysis</module>
 		<module>llp-mybatisplus</module>
-		<module>llp-springboot-rocketmq</module>
+		<module>llp-rocketmq</module>
 		<module>llp-Spring-Retry</module>
 		<module>llp-easyexcel</module>
 		<module>llp-redis</module>
