@@ -7,13 +7,14 @@ import com.llp.crypto.pojo.CommonResult;
 import com.llp.crypto.vo.UserReqVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
+@Slf4j
 @RestController
 @Api(tags = "测试加密解密")
 public class TestController {
@@ -40,9 +41,11 @@ public class TestController {
     @ApiOperation("测试get加密")
     @EncryptionAnnotation  // responseBody 加密
     @DecryptionAnnotation // requestBody 自动解密
-    public CommonResult<UserReqVO> getEncrypt(String param) {
-        String userStr = "{\"username\":\"admin\",\"deptId\":\"1250500000\",\"userId\":\"1\",\"phone\":\"15195928695\"}";
-        UserReqVO userReqVO = JSONUtil.toBean(userStr, UserReqVO.class);
+    public CommonResult<UserReqVO> getEncrypt(String data) {
+        log.info("解密后的数据：{}",data);
+        UserReqVO userReqVO = JSONUtil.toBean(data, UserReqVO.class);
+        //UserReqVO(username=admin, deptId=1250500000, userId=1, phone=15195928695)
+        log.info("用户信息:{}",userReqVO);
         return CommonResult.success(userReqVO);
     }
 }

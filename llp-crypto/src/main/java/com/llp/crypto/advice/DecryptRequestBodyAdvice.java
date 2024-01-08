@@ -11,18 +11,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 /**
@@ -97,6 +90,7 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 
         public MyHttpInputMessage(HttpInputMessage inputMessage, MethodParameter parameter) throws Exception {
             this.headers = inputMessage.getHeaders();
+            //只对post请求进行加密
             if (parameter.hasMethodAnnotation(PostMapping.class)) {
                 /*
                  *请求报文示例：
