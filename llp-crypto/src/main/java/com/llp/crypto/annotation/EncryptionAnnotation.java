@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @description: 加密生成类
+ * @description: 响应参数加密
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

@@ -37,9 +37,13 @@ public class TestController {
     }
 
 
+    /**
+     * 请求示例
+     * @param data
+     * @return
+     */
     @GetMapping(value = "/getEncrypt")
     @ApiOperation("测试get加密")
-    @EncryptionAnnotation  // responseBody 加密
     @DecryptionAnnotation // requestBody 自动解密
     public CommonResult<UserReqVO> getEncrypt(String data) {
         log.info("解密后的数据：{}",data);
