@@ -335,7 +335,7 @@ public class TestRSA {
             String sign1 = signSha256withRSA(data, privateKey);
             // RSA验签(SHA256withRSA)
             boolean result1 = signVerifySHA256WithRSA(data, publicKey, sign1);
-            System.out.println("SHA256withRSA验签结果:" + result);
+            System.out.println("SHA256withRSA验签结果:" + result1);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.print("加解密异常");

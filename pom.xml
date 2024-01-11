@@ -26,6 +26,7 @@
 		<module>llp-cache-redis</module>
 		<module>llp-mapstruct</module>
         <module>llp-dynamicDataSource</module>
+        <module>llp-springbatch</module>
     </modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>
