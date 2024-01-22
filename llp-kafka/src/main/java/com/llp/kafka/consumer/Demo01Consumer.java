@@ -5,7 +5,6 @@ package com.llp.kafka.consumer;
 import com.llp.kafka.message.Demo01Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.annotation.KafkaListeners;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,10 +25,10 @@ public class Demo01Consumer {
     }
 
 
-    @KafkaListeners({@KafkaListener(topics = Demo01Message.TOPIC,
-            groupId = "demo01-consumer-group-" + Demo01Message.TOPIC)})
-    public void onMessage1(Demo01Message message) {
-        log.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
-    }
+    // @KafkaListeners({@KafkaListener(topics = Demo01Message.TOPIC,
+    //         groupId = "demo01-consumer-group-" + Demo01Message.TOPIC)})
+    // public void onMessage1(Demo01Message message) {
+    //     log.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
+    // }
 
 }
