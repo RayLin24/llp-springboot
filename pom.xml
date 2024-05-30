@@ -28,6 +28,7 @@
         <module>llp-dynamicDataSource</module>
         <module>llp-springbatch</module>
         <module>llp-kafka</module>
+        <module>llp-jasypt</module>
     </modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>

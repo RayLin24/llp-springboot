@@ -1,0 +1,33 @@
+jasypt:
+  encryptor:
+    # 加密的秘钥
+#    password: llp
+    # 加密算法
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    property:
+      # 算法识别的前后缀，默认ENC()，数据库密文示例：password: "ENC(DzANBAhBWXxZqAOsagIBCoaw8FV4gYRbid7G70UEM24=)"
+      prefix: Enc(
+      suffix: )
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/llp?autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: Enc(TCFVL/wsN9AxelTDQyP/3g==)
+    password: Enc(TCFVL/wsN9AxelTDQyP/3g==)
+
+#mybatis配置
+mybatis:
+  #指定要扫描的mapper.xml位置; classpath:mapper/*.xml 扫描在类路径下的mapper目录下的。xml文件
+  mapper-locations: classpath:mapper/*.xml
+  #配置类型别名,通常指定实体类所在包，这样我们在xml中resultType="com.llp.springboot.mybatis.bean.Monster"就可以简写成Monster
+  type-aliases-package: com.llp.springboot.jasypt.entity
+  #配置mybatis sql打印日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #启用自动驼峰配置
+    map-underscore-to-camel-case: true
+
+  #通过config-location可以指定mybatis-config.xml，这样就可以用传统的方式来配置mybatis
+  #config-location: classpath:mybatis-config.xml
