@@ -30,7 +30,8 @@
         <module>llp-kafka</module>
         <module>llp-jasypt</module>
         <module>llp-repeatSubmit</module>
-    </modules>
+		<module>llp-flowable</module>
+	</modules>
 	<packaging>pom</packaging>
 	<name>llp-springboot</name>
 
