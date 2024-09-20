@@ -59,8 +59,11 @@ public class FlowableContainGatewayTest {
     }
 
     /**
-     * day>=3 经理审批
-     * day<3 技术经理审批
+     * day>10总经理审批
+     * day>3项目经理审批
+     * day<=3技术经理审批
+     * 包含网关可以理解为是并行和排他的一个结合
+     * 当满足条件的多个分支都审批通过后进入下一个分支
      */
     @Test
     public void completeTask() {
