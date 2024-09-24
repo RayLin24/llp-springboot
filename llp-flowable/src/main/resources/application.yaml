@@ -15,7 +15,7 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
 flowable:
-  async-executor-activate: true #关闭定时任务JOB
+  async-executor-activate: true #fakse关闭定时异步任务JOB true开启
   #  将databaseSchemaUpdate设置为true。当Flowable发现库与数据库表结构不一致时，会自动将数据库表结构升级至新版本。
   database-schema-update: true
 server:

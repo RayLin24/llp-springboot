@@ -19,10 +19,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 值表达式|方法表达式
+ */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableSpringBootTest {
+public class FlowableExpressionTest {
     //从spring容器中获取流程引擎
     @Autowired
     private ProcessEngine processEngine;
