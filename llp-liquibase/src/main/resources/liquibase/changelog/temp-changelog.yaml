@@ -1,0 +1,231 @@
+databaseChangeLog:
+- changeSet:
+    id: 1727408313968-1
+    author: asus (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            remarks: 主键
+            type: INT
+        - column:
+            name: blogAuthor
+            remarks: 博客作者标识
+            type: VARCHAR(255)
+        - column:
+            name: blogUrl
+            remarks: 博客链接
+            type: VARCHAR(255)
+        - column:
+            name: blogTitle
+            remarks: 博客标题
+            type: VARCHAR(255)
+        - column:
+            name: blogItem
+            remarks: 博客栏目
+            type: VARCHAR(255)
+        tableName: bloginfo
+- changeSet:
+    id: 1727408313968-2
+    author: asus (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            remarks: 主键
+            type: INT
+        - column:
+            name: blogAuthor
+            remarks: 博客作者标识
+            type: VARCHAR(255)
+        - column:
+            name: blogUrl
+            remarks: 博客链接
+            type: VARCHAR(255)
+        - column:
+            name: blogTitle
+            remarks: 博客标题
+            type: VARCHAR(255)
+        - column:
+            name: blogItem
+            remarks: 博客栏目
+            type: VARCHAR(255)
+        tableName: bloginfo2
+- changeSet:
+    id: 1727408313968-3
+    author: asus (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: BIGINT
+        - column:
+            name: nick_name
+            type: VARCHAR(255)
+        - column:
+            name: tenant_id
+            type: VARCHAR(32)
+        tableName: member
+- changeSet:
+    id: 1727408313968-4
+    author: asus (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            remarks: 主键id
+            type: BIGINT
+        - column:
+            name: name
+            remarks: 姓名
+            type: VARCHAR(50)
+        - column:
+            name: nick_name
+            remarks: 昵称
+            type: VARCHAR(50)
+        - column:
+            name: mobile
+            remarks: 联系电话
+            type: VARCHAR(50)
+        - column:
+            name: email
+            remarks: 邮箱
+            type: VARCHAR(50)
+        - column:
+            defaultValueComputed: current_timestamp()
+            name: create_time
+            remarks: 创建时间
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            defaultValueComputed: current_timestamp()
+            name: update_time
+            remarks: 更新时间
+            type: datetime
+        tableName: sys_user
+- changeSet:
+    id: 1727408313968-5
+    author: asus (generated)
+    changes:
+    - insert:
+        columns:
+        - column:
+            name: id
+            valueNumeric: 1
+        - column:
+            name: nick_name
+            value: llp
+        - column:
+            name: tenant_id
+            value: '1'
+        tableName: member
+    - insert:
+        columns:
+        - column:
+            name: id
+            valueNumeric: 2
+        - column:
+            name: nick_name
+            value: wukong
+        - column:
+            name: tenant_id
+            value: '2'
+        tableName: member
+    - insert:
+        columns:
+        - column:
+            name: id
+            valueNumeric: 3
+        - column:
+            name: nick_name
+            value: bajie
+        - column:
+            name: tenant_id
+            value: '2'
+        tableName: member
+    - insert:
+        columns:
+        - column:
+            name: id
+            valueNumeric: 4
+        - column:
+            name: nick_name
+            value: kong
+        - column:
+            name: tenant_id
+            value: '1'
+        tableName: member
+- changeSet:
+    id: 1727408313968-6
+    author: asus (generated)
+    changes:
+    - insert:
+        columns:
+        - column:
+            name: id
+            valueNumeric: 1
+        - column:
+            name: name
+            value: 孙悟空
+        - column:
+            name: nick_name
+            value: 卡卡罗特
+        - column:
+            name: mobile
+            value: '1502350185'
+        - column:
+            name: email
+            value: 252539689@qq.com
+        - column:
+            name: create_time
+            valueDate: 2023-12-04T14:57:52
+        - column:
+            name: update_time
+            valueDate: 2023-12-04T14:57:52
+        tableName: sys_user
+    - insert:
+        columns:
+        - column:
+            name: id
+            valueNumeric: 2
+        - column:
+            name: name
+            value: 贝吉塔
+        - column:
+            name: nick_name
+            value: 塔尔
+        - column:
+            name: mobile
+            value: '1502350182'
+        - column:
+            name: email
+            value: 252539619@qq.com
+        - column:
+            name: create_time
+            valueDate: 2023-12-04T14:58:37
+        - column:
+            name: update_time
+            valueDate: 2023-12-04T14:58:47
+        tableName: sys_user
+
