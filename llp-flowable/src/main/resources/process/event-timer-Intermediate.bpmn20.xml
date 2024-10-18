@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:flowable="http://flowable.org/bpmn"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef" exporter="Flowable Open Source Modeler"
+             exporterVersion="6.7.2">
+  <process id="event-timer-Intermediate" name="event-timer-Intermediate" isExecutable="true">
+    <documentation>event-timer-Intermediate</documentation>
+    <startEvent id="sid-9C382A1C-E16A-4B2D-92C1-68E6853D947C" name="开始" flowable:formFieldValidation="true"></startEvent>
+    <userTask id="sid-B9E5BB5E-B28A-4907-8272-19E9BBB96CCE" flowable:assignee="zhangsan" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-6DA019F6-2637-4E15-9604-BEE69E74F3AC" sourceRef="sid-9C382A1C-E16A-4B2D-92C1-68E6853D947C" targetRef="sid-B9E5BB5E-B28A-4907-8272-19E9BBB96CCE"></sequenceFlow>
+    <intermediateCatchEvent id="sid-74D2B333-8337-4E8D-B3E7-A3C4AEB894AD">
+      <timerEventDefinition>
+        <timeDuration>PT1M</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <userTask id="sid-AABE2695-D381-4BA2-A69A-D2FD188B4C15" flowable:assignee="lisi" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-7535BEC3-E4BC-43DA-8C97-DB7EEFE8D960" sourceRef="sid-74D2B333-8337-4E8D-B3E7-A3C4AEB894AD" targetRef="sid-AABE2695-D381-4BA2-A69A-D2FD188B4C15"></sequenceFlow>
+    <endEvent id="sid-42E4107B-2B58-41E6-8689-D7BAA757270C" name="结束"></endEvent>
+    <sequenceFlow id="sid-C013755F-23CE-42A7-AD0C-C572378FAE83" sourceRef="sid-AABE2695-D381-4BA2-A69A-D2FD188B4C15" targetRef="sid-42E4107B-2B58-41E6-8689-D7BAA757270C"></sequenceFlow>
+    <sequenceFlow id="sid-E6169E53-5DDF-43F1-8B9E-7CBF9A363ECE" sourceRef="sid-B9E5BB5E-B28A-4907-8272-19E9BBB96CCE" targetRef="sid-74D2B333-8337-4E8D-B3E7-A3C4AEB894AD"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_event-timer-Intermediate">
+    <bpmndi:BPMNPlane bpmnElement="event-timer-Intermediate" id="BPMNPlane_event-timer-Intermediate">
+      <bpmndi:BPMNShape bpmnElement="sid-9C382A1C-E16A-4B2D-92C1-68E6853D947C" id="BPMNShape_sid-9C382A1C-E16A-4B2D-92C1-68E6853D947C">
+        <omgdc:Bounds height="30.0" width="30.0" x="149.99999776482585" y="104.9999984353781"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-B9E5BB5E-B28A-4907-8272-19E9BBB96CCE" id="BPMNShape_sid-B9E5BB5E-B28A-4907-8272-19E9BBB96CCE">
+        <omgdc:Bounds height="80.0" width="100.0" x="224.99999776482582" y="79.9999984353781"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-74D2B333-8337-4E8D-B3E7-A3C4AEB894AD" id="BPMNShape_sid-74D2B333-8337-4E8D-B3E7-A3C4AEB894AD">
+        <omgdc:Bounds height="30.99999999999997" width="31.0" x="369.9999867379668" y="104.49999687820682"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-AABE2695-D381-4BA2-A69A-D2FD188B4C15" id="BPMNShape_sid-AABE2695-D381-4BA2-A69A-D2FD188B4C15">
+        <omgdc:Bounds height="79.99999999999999" width="99.99999999999994" x="445.9999867379668" y="79.9999968782068"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-42E4107B-2B58-41E6-8689-D7BAA757270C" id="BPMNShape_sid-42E4107B-2B58-41E6-8689-D7BAA757270C">
+        <omgdc:Bounds height="28.0" width="28.0" x="590.9999867379668" y="105.99999687820679"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-E6169E53-5DDF-43F1-8B9E-7CBF9A363ECE" id="BPMNEdge_sid-E6169E53-5DDF-43F1-8B9E-7CBF9A363ECE" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="16.0" flowable:targetDockerY="15.999999999999986">
+        <omgdi:waypoint x="324.9499977648235" y="120.22499775700271"></omgdi:waypoint>
+        <omgdi:waypoint x="370.000013337224" y="120.42792573932996"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-7535BEC3-E4BC-43DA-8C97-DB7EEFE8D960" id="BPMNEdge_sid-7535BEC3-E4BC-43DA-8C97-DB7EEFE8D960" flowable:sourceDockerX="16.0" flowable:sourceDockerY="16.0" flowable:targetDockerX="49.99999999999997" flowable:targetDockerY="39.99999999999999">
+        <omgdi:waypoint x="401.94982540708395" y="120.4272703411"></omgdi:waypoint>
+        <omgdi:waypoint x="445.9999867379668" y="120.22704233275225"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-C013755F-23CE-42A7-AD0C-C572378FAE83" id="BPMNEdge_sid-C013755F-23CE-42A7-AD0C-C572378FAE83" flowable:sourceDockerX="49.99999999999997" flowable:sourceDockerY="39.99999999999999" flowable:targetDockerX="14.0" flowable:targetDockerY="14.0">
+        <omgdi:waypoint x="545.9499867379459" y="119.99999687820679"></omgdi:waypoint>
+        <omgdi:waypoint x="590.9999867379668" y="119.99999687820679"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-6DA019F6-2637-4E15-9604-BEE69E74F3AC" id="BPMNEdge_sid-6DA019F6-2637-4E15-9604-BEE69E74F3AC" flowable:sourceDockerX="15.0" flowable:sourceDockerY="15.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="179.94999625478349" y="119.9999984353781"></omgdi:waypoint>
+        <omgdi:waypoint x="224.99999776482582" y="119.9999984353781"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
