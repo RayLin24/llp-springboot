@@ -13,13 +13,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * 定时器边界事件
+ * 开始时间
  */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableEventTimerBoundaryTest {
-
+public class FlowableEventBeginTest {
     //从spring容器中获取流程引擎
     @Autowired
     private ProcessEngine processEngine;
@@ -37,28 +36,18 @@ public class FlowableEventTimerBoundaryTest {
      * 流程部署
      */
     @Test
-    public void deployFlow() throws InterruptedException {
+    public void deployFlow() {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/event-timer-boundary.bpmn20.xml")
-                .name("定时器边界事件")
+                .addClasspathResource("process/event-begin.bpmn20.xml")
+                .name("消息开始事件")
                 .deploy();
         System.out.println(deploy.getId());
     }
 
     @Test
-    public void startProcess() throws InterruptedException {
-        String processInstanceId = "event-timer-boundary:2:dc86c21f-8d00-11ef-af0b-287fcff7031e";
-        runtimeService.startProcessInstanceById(processInstanceId);
-        Thread.sleep(Integer.MAX_VALUE);
-    }
-
-
-    @Test
-    public void completeTask() throws InterruptedException {
-        String taskId = "5832d63d-8d19-11ef-bf2c-287fcff7031e";
-        taskService.complete(taskId);
-        //Thread.sleep(Integer.MAX_VALUE);
+    public void startProcess() {
+        runtimeService.startProcessInstanceByMessage("msg01");
     }
 
 }

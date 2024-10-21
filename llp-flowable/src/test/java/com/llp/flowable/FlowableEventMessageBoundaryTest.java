@@ -13,12 +13,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * 定时器边界事件
+ * 消息边界事件
  */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableEventTimerBoundaryTest {
+public class FlowableEventMessageBoundaryTest {
 
     //从spring容器中获取流程引擎
     @Autowired
@@ -40,25 +40,31 @@ public class FlowableEventTimerBoundaryTest {
     public void deployFlow() throws InterruptedException {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/event-timer-boundary.bpmn20.xml")
-                .name("定时器边界事件")
+                .addClasspathResource("process/event-message-boundary.bpmn20.xml")
+                .name("消息边界事件")
                 .deploy();
         System.out.println(deploy.getId());
     }
 
     @Test
     public void startProcess() throws InterruptedException {
-        String processInstanceId = "event-timer-boundary:2:dc86c21f-8d00-11ef-af0b-287fcff7031e";
+        String processInstanceId = "event-message-boundary:2:6ed3e8d8-8d31-11ef-a407-287fcff7031e";
         runtimeService.startProcessInstanceById(processInstanceId);
-        Thread.sleep(Integer.MAX_VALUE);
     }
 
 
     @Test
     public void completeTask() throws InterruptedException {
-        String taskId = "5832d63d-8d19-11ef-bf2c-287fcff7031e";
+        String taskId = "84918d6d-8d31-11ef-82ea-287fcff7031e";
         taskService.complete(taskId);
         //Thread.sleep(Integer.MAX_VALUE);
+    }
+
+    @Test
+    public void senMessage() throws InterruptedException {
+        // 查询出当前的 执行实例的 编号
+        runtimeService.messageEventReceived("msg04","e8c456e2-8d31-11ef-a12e-287fcff7031e");
+        Thread.sleep(Integer.MAX_VALUE);
     }
 
 }
