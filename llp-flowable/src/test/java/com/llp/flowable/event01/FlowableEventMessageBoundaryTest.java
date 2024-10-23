@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -40,7 +40,7 @@ public class FlowableEventMessageBoundaryTest {
     public void deployFlow() throws InterruptedException {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/event-message-boundary.bpmn20.xml")
+                .addClasspathResource("process/01-event/event-message-boundary.bpmn20.xml")
                 .name("消息边界事件")
                 .deploy();
         System.out.println(deploy.getId());

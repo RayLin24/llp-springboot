@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -6,6 +6,7 @@ import org.flowable.engine.RepositoryService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.repository.Deployment;
+import org.flowable.task.api.Task;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 包含网关
+ * 并行网关
  */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableContainGatewayTest {
+public class FlowableParallelGatewayTest {
 
     @Autowired
     private ProcessEngine processEngine;
@@ -43,8 +44,8 @@ public class FlowableContainGatewayTest {
     public void deployFlow() {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/HolidayDemo8.bpmn20.xml")
-                .name("包含网关案例")
+                .addClasspathResource("process/01-event/HolidayDemo7.bpmn20.xml")
+                .name("并行网关案例")
                 .deploy();
         System.out.println(deploy.getId());
     }
@@ -54,22 +55,28 @@ public class FlowableContainGatewayTest {
      */
     @Test
     public void startProcess() {
-        String processInstanceId = "HolidayDemo8:1:1d3c334b-76fe-11ef-ad36-287fcff7031e";
-        runtimeService.startProcessInstanceById(processInstanceId);
+        String processInstanceId = "HolidayDemo7:1:0e762fbc-76fb-11ef-8265-287fcff7031e";
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("apply", "llp");
+        runtimeService.startProcessInstanceById(processInstanceId, variables);
     }
 
     /**
-     * day>10总经理审批
-     * day>3项目经理审批
-     * day<=3技术经理审批
-     * 包含网关可以理解为是并行和排他的一个结合
-     * 当满足条件的多个分支都审批通过后进入下一个分支
+     * 并行网关会同时分配任务给到多个分支
+     * 多个分支审批通过之后再到并行网关汇聚进入下一个阶段的审批
+     *
      */
     @Test
     public void completeTask() {
-        String taskId = "2d8fe3b1-76fe-11ef-9b4c-287fcff7031e";
-        Map<String,Object> variables = new HashMap<>();
-        variables.put("day", 11);
-        taskService.complete(taskId,variables);
+        Task task = taskService.createTaskQuery().taskAssignee("lisi").processInstanceId("21543400-76fb-11ef-bf18-287fcff7031e").singleResult();
+        if (task != null) {
+            taskService.complete(task.getId());
+            System.out.println("lisi完成Task");
+        }
+        Task task2 = taskService.createTaskQuery().taskAssignee("wangwu").processInstanceId("21543400-76fb-11ef-bf18-287fcff7031e").singleResult();
+        if (task2 != null) {
+            taskService.complete(task2.getId());
+            System.out.println("wangwu完成Task");
+        }
     }
 }

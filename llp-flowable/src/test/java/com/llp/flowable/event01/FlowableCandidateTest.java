@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -44,7 +44,7 @@ public class FlowableCandidateTest {
     public void deployFlow() {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/HolidayDemo2.bpmn20.xml")
+                .addClasspathResource("process/01-event/HolidayDemo2.bpmn20.xml")
                 .name("候选人案例")
                 .deploy();
         System.out.println(deploy.getId());

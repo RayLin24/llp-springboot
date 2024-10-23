@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -12,17 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * 排他网关
+ * 信号启动事件
  */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableExclusiveGatewayTest {
+public class FlowableSignalBeginTest {
 
+    //从spring容器中获取流程引擎
     @Autowired
     private ProcessEngine processEngine;
 
@@ -40,34 +38,26 @@ public class FlowableExclusiveGatewayTest {
      * 流程部署
      */
     @Test
-    public void deployFlow() {
+    public void deployFlow() throws InterruptedException {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/HolidayDemo5.bpmn20.xml")
-                .name("排他网关案例")
+                .addClasspathResource("process/01-event/signal/event-signal-begin.bpmn20.xml")
+                .name("信号启动事件")
                 .deploy();
         System.out.println(deploy.getId());
     }
 
-    /**
-     * 启动流程实例
-     */
     @Test
-    public void startProcess() {
-        String processInstanceId = "HolidayDemo5:1:8e0a205c-76f8-11ef-b44a-287fcff7031e";
-        runtimeService.startProcessInstanceById(processInstanceId);
+    public void startProcess() throws InterruptedException {
+        //通过发送信号。触发对应订阅了该信号的流程
+        runtimeService.signalEventReceived("signal1");
     }
 
-    /**
-     * day>=3 经理审批
-     * day<3 技术经理审批
-     */
     @Test
     public void completeTask() {
-        String taskId = "a4e48019-76f8-11ef-a71e-287fcff7031e";
-        Map<String,Object> variables = new HashMap<>();
-        variables.put("day",2);
-        taskService.complete(taskId,variables);
-        System.out.println("完成Task");
+        String taskId = "2f016845-8f7d-11ef-acdd-287fcff7031e";
+        taskService.complete(taskId);
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -46,7 +46,7 @@ public class FlowableExpressionTest {
     public void deployFlow() {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/HolidayUI.bpmn20.xml")
+                .addClasspathResource("process/01-event/HolidayUI.bpmn20.xml")
                 // 部署第二个流程
                 //.addClasspathResource("process/消息中间事件.bpmn20.xml")
                 .name("第一个流程案例")
@@ -132,7 +132,7 @@ public class FlowableExpressionTest {
     public void deployDemo2() {
         // 部署流程
         Deployment deployment = repositoryService.createDeployment()
-                .addClasspathResource("process/Demo02.bpmn20.xml")
+                .addClasspathResource("process/01-event/Demo02.bpmn20.xml")
                 .name("任务分配demo")
                 .deploy();
         //对应act_re_deployment 表id 61fc3a23-73d6-11ef-b9dc-287fcff7031e

@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -39,7 +39,7 @@ public class FlowableVariablesTest {
     public void deployFlow() {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/HolidayUI.bpmn20.xml")
+                .addClasspathResource("process/01-event/HolidayUI.bpmn20.xml")
                 // 部署第二个流程
                 //.addClasspathResource("process/消息中间事件.bpmn20.xml")
                 .name("流程变量")

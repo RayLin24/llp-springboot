@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -6,23 +6,19 @@ import org.flowable.engine.RepositoryService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.repository.Deployment;
-import org.flowable.task.api.Task;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
 /**
- * 定时事件
+ * 错误开始事件
  */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableEventTimerTest {
-
+public class FlowableErrorBoundaryTest {
     //从spring容器中获取流程引擎
     @Autowired
     private ProcessEngine processEngine;
@@ -40,33 +36,18 @@ public class FlowableEventTimerTest {
      * 流程部署
      */
     @Test
-    public void deployFlow() throws InterruptedException {
+    public void deployFlow() {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/event-timer01.bpmn20.xml")
-                .name("定时时间案例")
+                .addClasspathResource("process/01-event/eventError/event-error-boundary.bpmn20.xml")
+                .name("错误边界事件")
                 .deploy();
         System.out.println(deploy.getId());
-        // 让进程触发监听
-        Thread.sleep(Integer.MAX_VALUE);
     }
 
-    /**
-     * 启动流程实例
-     */
     @Test
     public void startProcess() {
-        String processInstanceId = "event-timer01:3:ee11defb-7a47-11ef-889e-287fcff7031e";
-        runtimeService.startProcessInstanceById(processInstanceId);
+        runtimeService.startProcessInstanceById("event-error-bundary:1:c0558751-8f54-11ef-abf4-287fcff7031e");
     }
 
-    @Test
-    public void findTask(){
-        List<Task> list = taskService.createTaskQuery()
-                .processDefinitionId("event-timer01:3:ee11defb-7a47-11ef-889e-287fcff7031e")
-                .taskAssignee("llp").list();
-        for (Task task : list) {
-            System.out.println("taskId:"+task.getId()+",任务名称："+task.getName());
-        }
-    }
 }

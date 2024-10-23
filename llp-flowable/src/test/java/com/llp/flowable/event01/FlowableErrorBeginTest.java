@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -13,13 +13,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * 定时器中间事件
+ * 错误开始事件
  */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableEventTimerIntermediateTest {
-
+public class FlowableErrorBeginTest {
     //从spring容器中获取流程引擎
     @Autowired
     private ProcessEngine processEngine;
@@ -37,27 +36,18 @@ public class FlowableEventTimerIntermediateTest {
      * 流程部署
      */
     @Test
-    public void deployFlow() throws InterruptedException {
+    public void deployFlow() {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/event-timer-Intermediate.bpmn20.xml")
-                .name("定时器中间事件")
+                .addClasspathResource("process/01-event/eventError/event-error-begin.bpmn20.xml")
+                .name("错误开始事件")
                 .deploy();
         System.out.println(deploy.getId());
     }
 
     @Test
     public void startProcess() {
-        String processInstanceId = "event-timer-Intermediate:6:9dea7f57-8cfd-11ef-9b66-287fcff7031e";
-        runtimeService.startProcessInstanceById(processInstanceId);
-    }
-
-
-    @Test
-    public void completeTask() throws InterruptedException {
-        String taskId = "f2d64dd3-8cfd-11ef-a129-287fcff7031e";
-        taskService.complete(taskId);
-        Thread.sleep(Integer.MAX_VALUE);
+        runtimeService.startProcessInstanceById("event-error-begin:1:f7d1e18c-8f4f-11ef-9b79-287fcff7031e");
     }
 
 }

@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import org.flowable.engine.ProcessEngine;
 import org.flowable.engine.ProcessEngineConfiguration;
@@ -30,7 +30,7 @@ public class FlowableTest {
         System.out.println(processEngine);
         // 3.部署流程,一次部署多个流程定义
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
-                .addClasspathResource("process/HolidayUI.bpmn20.xml")
+                .addClasspathResource("process/01-event/HolidayUI.bpmn20.xml")
                 //.addClasspathResource("process/消息中间事件.bpmn20.xml")   // 部署第二个流程
                 .name("第一个流程案例")
                 .deploy();

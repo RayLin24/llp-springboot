@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -46,7 +46,7 @@ public class FlowableOtherCancelTest {
     public void deployFlow() throws InterruptedException {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/cancel/event-other-cancel.bpmn20.xml")
+                .addClasspathResource("process/01-event/cancel/event-other-cancel.bpmn20.xml")
                 .name("取消结束事件")
                 .deploy();
         System.out.println(deploy.getId());

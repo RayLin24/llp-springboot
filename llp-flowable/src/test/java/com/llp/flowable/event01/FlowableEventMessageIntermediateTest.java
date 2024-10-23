@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -6,23 +6,20 @@ import org.flowable.engine.RepositoryService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.repository.Deployment;
+import org.flowable.engine.runtime.Execution;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * 终止结束事件
+ * 消息中间事件
  */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableOtherTermination1Test {
-
+public class FlowableEventMessageIntermediateTest {
     //从spring容器中获取流程引擎
     @Autowired
     private ProcessEngine processEngine;
@@ -36,32 +33,44 @@ public class FlowableOtherTermination1Test {
     @Autowired
     private TaskService taskService;
 
-
     /**
      * 流程部署
      */
     @Test
-    public void deployFlow() throws InterruptedException {
+    public void deployFlow() {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/terminate/event-other-termination1.bpmn20.xml")
-                .name("终止结束事件")
+                .addClasspathResource("process/01-event/event-message-Intermediate.bpmn20.xml")
+                .name("消息中间事件")
                 .deploy();
         System.out.println(deploy.getId());
     }
 
+
     @Test
-    public void startProcess() throws InterruptedException {
-        String processDefinitionId = "event-other-termination1:1:623daac8-8f87-11ef-b11d-287fcff7031e";
-        runtimeService.startProcessInstanceById(processDefinitionId);
+    public void startProcess() {
+        runtimeService.startProcessInstanceById("b46fbc95-8d26-11ef-8478-287fcff7031e");
     }
 
-    //2f016845-8f7d-11ef-acdd-287fcff7031e
     @Test
     public void completeTask() throws InterruptedException {
-        String taskId = "963299d9-8f87-11ef-ad13-287fcff7031e";
-        Map<String,Object> map = new HashMap<>();
-        map.put("flag",false);
-        taskService.complete(taskId,map);
+        taskService.complete("00274827-8d27-11ef-b604-287fcff7031e");
+        Thread.sleep(Integer.MAX_VALUE);
     }
+
+    /**
+     * 触发消息中间事件
+     */
+    @Test
+    public void senMessage(){
+        // 查询出当前的 执行实例的 编号
+        Execution execution = runtimeService.createExecutionQuery()
+                .processInstanceId("00226622-8d27-11ef-b604-287fcff7031e")
+                .onlyChildExecutions()
+                .singleResult();
+
+        System.out.println("执行实例ID：" + execution.getId());
+        runtimeService.messageEventReceived("msg02",execution.getId());
+    }
+
 }

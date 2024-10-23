@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.task02;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -17,10 +17,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 用户任务委派转办
+ */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableTaskListenerTest {
+public class FlowableUserTask01Test {
     //从spring容器中获取流程引擎
     @Autowired
     private ProcessEngine processEngine;
@@ -41,8 +44,8 @@ public class FlowableTaskListenerTest {
     public void deployFlow() {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/Demo03.bpmn20.xml")
-                .name("demo03")
+                .addClasspathResource("process/02-task/task-user-task.bpmn20.xml")
+                .name("用户任务委派转办")
                 .deploy();
         System.out.println(deploy.getId());
     }
@@ -57,10 +60,8 @@ public class FlowableTaskListenerTest {
         //对应act_re_procdef的id,流程定义之后会生成id , key对应KEY
 
         // 一、流程实例id启动流程实例
-        String processInstanceId = "demo03:1:d0289159-758e-11ef-b629-287fcff7031e";
-        Map<String, Object> variables = new HashMap<>();
-        variables.put("assign", "zhangsan");
-        runtimeService.startProcessInstanceById(processInstanceId,variables);
+        String processInstanceId = "task-user-task:4:e649ebbd-9106-11ef-b972-287fcff7031e";
+        runtimeService.startProcessInstanceById(processInstanceId);
     }
 
     /**
@@ -87,11 +88,38 @@ public class FlowableTaskListenerTest {
         taskService.complete(taskId);
     }
 
+    /**
+     * 单纯的指派
+     */
     @Test
-    public void completeTask2() {
+    public void taskAssignee() {
         TaskService taskService = processEngine.getTaskService();
         // 任务id
-        String taskId = "eaff7dae-758f-11ef-98ff-287fcff7031e";
-        taskService.complete(taskId);
+        String taskId = "7e8ca64f-9107-11ef-8df0-287fcff7031e";
+        Map<String,Object> map = new HashMap<>();
+        map.put("assigneeFlag",true);
+        taskService.setAssignee(taskId, "lisi");
+        taskService.complete(taskId,map);
     }
+
+    /**
+     * 委派任务
+     */
+    @Test
+    public void delegateTask() {
+        // 委派任务的处理人。还可以撤销委派
+        String taskId = "fead771f-90eb-11ef-8c30-287fcff7031e";
+        taskService.delegateTask(taskId, "wangwu");
+    }
+
+    /**
+     * 撤销委派
+     */
+    @Test
+    public void resolveTask() {
+        // 委派任务的处理人。还可以撤销委派
+        String taskId = "fead771f-90eb-11ef-8c30-287fcff7031e";
+        taskService.resolveTask(taskId);
+    }
+
 }

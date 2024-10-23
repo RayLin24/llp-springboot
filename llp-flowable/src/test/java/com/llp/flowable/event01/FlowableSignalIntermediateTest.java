@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -13,12 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * 开始时间
+ * 信号中间事件
  */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableEventBeginTest {
+public class FlowableSignalIntermediateTest {
+
     //从spring容器中获取流程引擎
     @Autowired
     private ProcessEngine processEngine;
@@ -32,22 +33,30 @@ public class FlowableEventBeginTest {
     @Autowired
     private TaskService taskService;
 
+
     /**
      * 流程部署
      */
     @Test
-    public void deployFlow() {
+    public void deployFlow() throws InterruptedException {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/event-begin.bpmn20.xml")
-                .name("消息开始事件")
+                .addClasspathResource("process/01-event/signal/event-signal-Intermediate.bpmn20.xml")
+                .name("信号中间事件")
                 .deploy();
         System.out.println(deploy.getId());
     }
 
     @Test
-    public void startProcess() {
-        runtimeService.startProcessInstanceByMessage("msg01");
+    public void startProcess() throws InterruptedException {
+        String processDefinitionId = "event-signal-boundary:1:11dfd37f-8f7d-11ef-a944-287fcff7031e";
+        runtimeService.startProcessInstanceById(processDefinitionId);
     }
 
+    //2f016845-8f7d-11ef-acdd-287fcff7031e
+    @Test
+    public void completeTask() throws InterruptedException {
+        String taskId = "2f016845-8f7d-11ef-acdd-287fcff7031e";
+        taskService.complete(taskId);
+    }
 }

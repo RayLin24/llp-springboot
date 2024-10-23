@@ -1,4 +1,4 @@
-package com.llp.flowable;
+package com.llp.flowable.event01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.*;
@@ -107,7 +107,7 @@ public class FlowableGroupTest {
         RepositoryService repositoryService = processEngine.getRepositoryService();
 
         Deployment deploy = repositoryService.createDeployment()
-                .addClasspathResource("process/HolidayDemo3.bpmn20.xml")
+                .addClasspathResource("process/01-event/HolidayDemo3.bpmn20.xml")
                 .name("请求流程-候选人组")
                 .deploy();
         System.out.println("deploy.getId() = " + deploy.getId());
