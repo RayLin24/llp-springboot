@@ -18,6 +18,15 @@ flowable:
   async-executor-activate: true #fakse关闭定时异步任务JOB true开启
   #  将databaseSchemaUpdate设置为true。当Flowable发现库与数据库表结构不一致时，会自动将数据库表结构升级至新版本。
   database-schema-update: true
+  mail:
+    server:
+      s-s-l-port: 465
+      host: smtp.qq.com
+      username: 252539670@qq.com
+      password: vyfukrjxstlabggi
+      default-from: 252539670@qq.com
+      use-ssl: true
+
 server:
   port: 8082
 logging:

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:flowable="http://flowable.org/bpmn"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef" exporter="Flowable Open Source Modeler"
+             exporterVersion="6.7.2">
+  <process id="task-mail-task" name="task-mail-task" isExecutable="true">
+    <documentation>task-mail-task</documentation>
+    <startEvent id="startEvent1" flowable:formFieldValidation="true"></startEvent>
+    <endEvent id="sid-A78C5E13-3093-413C-9920-1FC9E4BAB984"></endEvent>
+    <sequenceFlow id="sid-A6251AD5-B3C2-4EF6-A2B0-0F38AE047D2C" sourceRef="sid-9D5068F1-039C-43F6-A0B3-2454C1BCD8E9" targetRef="sid-A78C5E13-3093-413C-9920-1FC9E4BAB984"></sequenceFlow>
+    <serviceTask id="sid-9D5068F1-039C-43F6-A0B3-2454C1BCD8E9" flowable:type="mail">
+      <extensionElements>
+        <flowable:field name="to">
+          <flowable:expression><![CDATA[${receive}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="from">
+          <flowable:expression><![CDATA[${sender}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="subject">
+          <flowable:string><![CDATA[测试主题]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="text">
+          <flowable:string><![CDATA[测试内容]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="charset">
+          <flowable:string><![CDATA[utf-8]]></flowable:string>
+        </flowable:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-F8843D3F-E6AA-4E84-AB7F-68BD9756B907" sourceRef="startEvent1" targetRef="sid-9D5068F1-039C-43F6-A0B3-2454C1BCD8E9"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_task-mail-task">
+    <bpmndi:BPMNPlane bpmnElement="task-mail-task" id="BPMNPlane_task-mail-task">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="99.99999850988391" y="104.9999984353781"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-A78C5E13-3093-413C-9920-1FC9E4BAB984" id="BPMNShape_sid-A78C5E13-3093-413C-9920-1FC9E4BAB984">
+        <omgdc:Bounds height="28.0" width="28.0" x="464.9999985098839" y="105.9999984353781"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-9D5068F1-039C-43F6-A0B3-2454C1BCD8E9" id="BPMNShape_sid-9D5068F1-039C-43F6-A0B3-2454C1BCD8E9">
+        <omgdc:Bounds height="79.99999999999999" width="100.0" x="269.99999597668653" y="79.99999724328525"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-F8843D3F-E6AA-4E84-AB7F-68BD9756B907" id="BPMNEdge_sid-F8843D3F-E6AA-4E84-AB7F-68BD9756B907" flowable:sourceDockerX="15.0" flowable:sourceDockerY="15.0" flowable:targetDockerX="21.999999672174454" flowable:targetDockerY="40.00000119209285">
+        <omgdi:waypoint x="129.9499979264651" y="119.9999984353781"></omgdi:waypoint>
+        <omgdi:waypoint x="269.99999597668653" y="119.9999984353781"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-A6251AD5-B3C2-4EF6-A2B0-0F38AE047D2C" id="BPMNEdge_sid-A6251AD5-B3C2-4EF6-A2B0-0F38AE047D2C" flowable:sourceDockerX="50.0" flowable:sourceDockerY="39.99999999999999" flowable:targetDockerX="14.0" flowable:targetDockerY="14.0">
+        <omgdi:waypoint x="369.9499919552453" y="119.9999976177823"></omgdi:waypoint>
+        <omgdi:waypoint x="464.9999985098839" y="119.99999833041396"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
