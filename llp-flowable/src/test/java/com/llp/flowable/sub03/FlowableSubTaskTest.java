@@ -55,15 +55,16 @@ public class FlowableSubTaskTest {
     @Test
     public void startProcess() {
         RuntimeService runtimeService = processEngine.getRuntimeService();
-        String processInstanceId = "sub-event-transactional:2:45e0f4f5-91ea-11ef-8ea6-287fcff7031e";
+        String processInstanceId = "sub-event-transactional:3:a592a8c6-926c-11ef-8bee-287fcff7031e";
         runtimeService.startProcessInstanceById(processInstanceId);
     }
 
     //bb147b8e-91e3-11ef-8a3a-287fcff7031e
     @Test
-    public void completeTask() {
+    public void completeTask() throws InterruptedException {
         Map<String,Object> map = new HashMap<>();
         map.put("cancelFlag",false);
-        taskService.complete("614744aa-91ea-11ef-914a-287fcff7031e",map);
+        taskService.complete("d6b87226-926c-11ef-8bb4-287fcff7031e",map);
+        Thread.sleep(Integer.MAX_VALUE);
     }
 }

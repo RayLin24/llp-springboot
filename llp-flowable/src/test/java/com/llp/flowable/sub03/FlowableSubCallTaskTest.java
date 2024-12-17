@@ -1,4 +1,4 @@
-package com.llp.flowable.task02;
+package com.llp.flowable.sub03;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.ProcessEngine;
@@ -16,12 +16,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 服务任务
+ * 调用任务
  */
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class FlowableServiceTask02Test {
+public class FlowableSubCallTaskTest {
     //从spring容器中获取流程引擎
     @Autowired
     private ProcessEngine processEngine;
@@ -43,8 +43,18 @@ public class FlowableServiceTask02Test {
     public void deployFlow() {
         Deployment deploy = processEngine.getRepositoryService().createDeployment()
                 // 部署一个流程
-                .addClasspathResource("process/02-task/task-service-task02.bpmn20.xml")
-                .name("服务任务")
+                .addClasspathResource("process/03-sub/sub-event-call-master.bpmn20.xml")
+                .name("调用流程")
+                .deploy();
+        System.out.println(deploy.getId());
+    }
+
+    @Test
+    public void deployFlowSub() {
+        Deployment deploy = processEngine.getRepositoryService().createDeployment()
+                // 部署一个流程
+                .addClasspathResource("process/03-sub/sub-event-call-sub.bpmn20.xml")
+                .name("调用流程")
                 .deploy();
         System.out.println(deploy.getId());
     }
@@ -55,31 +65,21 @@ public class FlowableServiceTask02Test {
     @Test
     public void startProcess() {
         RuntimeService runtimeService = processEngine.getRuntimeService();
+        String processInstanceId = "sub-event-call-master:1:2b798e08-9275-11ef-a1df-287fcff7031e";
+        runtimeService.startProcessInstanceById(processInstanceId);
+    }
+
+    //bb147b8e-91e3-11ef-8a3a-287fcff7031e
+    @Test
+    public void completeTask() throws InterruptedException {
         Map<String,Object> map = new HashMap<>();
-        map.put("name","张三");
-        map.put("age",20);
-        map.put("nickname","美猴王");
-        String processInstanceId = "task-service-task02:4:38e47f30-bc27-11ef-87f6-287fcff7031e";
-        runtimeService.startProcessInstanceById(processInstanceId,map);
+        //map.put("totalAmount",121);
+        taskService.complete("58361f07-9277-11ef-9cbc-287fcff7031e");
     }
 
-    /**
-     * 审批待办任务
-     */
     @Test
-    public void completeTask() {
-        TaskService taskService = processEngine.getTaskService();
-        // 任务id
-        String taskId = "689c77fd-9115-11ef-9750-287fcff7031e";
-        taskService.complete(taskId);
+    public void getVariables(){
+        Map<String, Object> variables = taskService.getVariables("62b3c704-9276-11ef-9a80-287fcff7031e");
+        System.out.println("variables: "+ variables);
     }
-
-    /**
-     * 触发接收任务
-     */
-    @Test
-    public void triggerReceiveTask() throws Exception{
-        runtimeService.trigger("68983239-9115-11ef-9750-287fcff7031e"); // 触发 接收任务
-    }
-
 }
