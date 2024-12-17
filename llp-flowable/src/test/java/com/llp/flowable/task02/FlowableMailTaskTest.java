@@ -55,10 +55,13 @@ public class FlowableMailTaskTest {
     @Test
     public void startProcess() {
         RuntimeService runtimeService = processEngine.getRuntimeService();
-        String processInstanceId = "task-mail-task:2:1d8c881e-91b2-11ef-b79b-287fcff7031e";
+        String processInstanceId = "task-mail-task:4:190b582a-bc3f-11ef-be1e-287fcff7031e";
         Map<String,Object> map = new HashMap<>();
         map.put("receive","252539670@qq.com");
         map.put("sender","252539670@qq.com");
+        map.put("title","测试邮件任务");
+        map.put("content","内容是测试邮件任务的内容");
+        //存在Html模版的格式则会替换掉文本格式的内容，仅发送html格式的邮件
         runtimeService.startProcessInstanceById(processInstanceId,map);
     }
 

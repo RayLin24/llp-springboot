@@ -19,10 +19,13 @@
           <flowable:expression><![CDATA[${sender}]]></flowable:expression>
         </flowable:field>
         <flowable:field name="subject">
-          <flowable:string><![CDATA[测试主题]]></flowable:string>
+          <flowable:expression><![CDATA[${title}]]></flowable:expression>
         </flowable:field>
         <flowable:field name="text">
-          <flowable:string><![CDATA[测试内容]]></flowable:string>
+          <flowable:expression><![CDATA[${content}]]></flowable:expression>
+        </flowable:field>
+        <flowable:field name="html">
+          <flowable:string><![CDATA[<h1>Html内容测试</h1>]]></flowable:string>
         </flowable:field>
         <flowable:field name="charset">
           <flowable:string><![CDATA[utf-8]]></flowable:string>
